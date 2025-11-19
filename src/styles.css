@@ -76,7 +76,15 @@ canvas {
 /* small screens */
 @media (max-width:880px){
   .heroSection{flex-direction:column}
-  .canvasArea{width:100vw;height:100vh}
+  .canvasArea{width:100vw;height:100vh
+  position: fixed;       /* stays in place as a background */
+  top: 0;
+  left: 0;
+  z-index: -1;           /* behind all other content */
+  pointer-events: none;  /* makes it non-clickable */
+  background: red;
+  background-size: cover; /* or use any background you want */
+}
   .nav{display:none}
 }
 
