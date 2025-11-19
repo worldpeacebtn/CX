@@ -1,9 +1,6 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
-import { Suspense, useEffect, useState } from "react";
-import Scene from "./Scene";
-
 import HeroCanvas from "./components/HeroCanvas";
 import Logo from "./components/Logo";
 import SlidesPage from "./pages/SlidesPage";
@@ -14,18 +11,6 @@ import ContactPage from "./pages/ContactPage";
 export default function App() {
   const [ready, setReady] = useState(false);
 
-  useEffect(() => {
-    requestAnimationFrame(() => setReady(true));
-  }, []);
-
-  if (!ready) return null; // prevents blue screen flash
-
-  return (
-    <Suspense fallback={null}>
-      <Scene />
-    </Suspense>
-  );
-}
 
 export default function App() {
   return (
