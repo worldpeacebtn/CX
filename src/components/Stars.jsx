@@ -1,6 +1,13 @@
-import React, { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import React, { Suspense, useMemo, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import {
+  OrbitControls,
+  Points,
+  PointMaterial,
+  PerspectiveCamera,
+} from "@react-three/drei";
+
+// ---------------- STARFIELD --------------------
 
 function Stars() {
   const positions = useMemo(() => {
@@ -20,11 +27,11 @@ function Stars() {
     const arr = ref.current.geometry.attributes.position.array;
 
     for (let i = 0; i < arr.length; i += 3) {
-      // Quantum drift wave
+      // cinematic drift
       arr[i + 1] += Math.sin(t + i) * 0.00015;
       arr[i] += Math.cos(t * 0.3 + i) * 0.0001;
 
-      // Sparkle effect
+      // occasional sparkle
       if (Math.random() > 0.999) {
         arr[i + 2] += (Math.random() - 0.5) * 0.3;
       }
@@ -46,14 +53,17 @@ function Stars() {
   );
 }
 
+// ---------------- MATRIX RAIN --------------------
+
 function MatrixRain() {
   const num = 140;
+
   const positions = useMemo(() => {
     const arr = new Float32Array(num * 3);
     for (let i = 0; i < arr.length; i += 3) {
-      arr[i] = (Math.random() - 0.5) * 20;  // X spread
-      arr[i + 1] = Math.random() * 15;     // height range
-      arr[i + 2] = (Math.random() - 0.5) * 10; // depth
+      arr[i] = (Math.random() - 0.5) * 20;
+      arr[i + 1] = Math.random() * 15;
+      arr[i + 2] = (Math.random() - 0.5) * 10;
     }
     return arr;
   }, []);
@@ -64,11 +74,8 @@ function MatrixRain() {
     const arr = ref.current.geometry.attributes.position.array;
 
     for (let i = 0; i < arr.length; i += 3) {
-      arr[i + 1] -= delta * 3.0;   // falling speed
-
-      if (arr[i + 1] < -8) {
-        arr[i + 1] = 10 + Math.random() * 5; // respawn
-      }
+      arr[i + 1] -= delta * 3.0;
+      if (arr[i + 1] < -8) arr[i + 1] = 10 + Math.random() * 5;
     }
 
     ref.current.geometry.attributes.position.needsUpdate = true;
@@ -86,6 +93,8 @@ function MatrixRain() {
   );
 }
 
+// ---------------- CINEMATIC CAMERA --------------------
+
 function CinematicCamera() {
   const ref = useRef();
 
@@ -96,17 +105,16 @@ function CinematicCamera() {
     ref.current.lookAt(0, 0, 0);
   });
 
-  return <perspectiveCamera ref={ref} fov={50} position={[0, 0, 18]} />;
+  return <PerspectiveCamera ref={ref} makeDefault fov={50} position={[0, 0, 18]} />;
 }
+
+// ---------------- HERO CANVAS --------------------
 
 export default function HeroCanvas() {
   return (
     <div className="heroCanvas" aria-hidden>
       <Suspense fallback={null}>
-        <Canvas
-          dpr={[1, 2]}
-          gl={{ antialias: true }}
-        >
+        <Canvas dpr={[1, 2]} gl={{ antialias: true }}>
           <CinematicCamera />
 
           <ambientLight intensity={0.5} />
@@ -115,7 +123,11 @@ export default function HeroCanvas() {
           <Stars />
           <MatrixRain />
 
-          <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+          <OrbitControls
+            enableZoom={false}
+            enablePan={false}
+            enableRotate={false}
+          />
         </Canvas>
       </Suspense>
     </div>
