@@ -8,9 +8,25 @@
   --card-bg: rgba(255,255,255,0.02);
 }
 
-
 *{box-sizing:border-box}
-html,body,#root{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Helvetica Neue', Arial;color:#eaf0ff;background:linear-gradient(180deg,var(--bg),var(--deep));}
+
+/* ===== FIXED ROOT + BODY ===== */
+html, body {
+  height:100%;
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, 'Helvetica Neue', Arial;
+  color:#eaf0ff;
+  background:linear-gradient(180deg,var(--bg),var(--deep));
+  overflow-x:hidden;
+}
+
+/* <<< IMPORTANT for stacking context fix */
+#root {
+  min-height:100vh;
+  width:100%;
+  position:relative;
+  isolation:isolate;
+}
 
 .app{display:flex;flex-direction:column;min-height:100vh;}
 .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,rgba(0,0,0,0.15),transparent);backdrop-filter: blur(6px);}
@@ -21,15 +37,6 @@ html,body,#root{height:100%;margin:0;font-family:Inter, system-ui, -apple-system
 
 .nav a{color:var(--muted);margin-left:14px;text-decoration:none}
 .nav a:hover{color:var(--accent2)}
-
-.heroCanvas, canvas {
-  position: relative;
-  z-index: 2;
-}
-body::before{
-  z-index:-1; /* safely behind everything */
-  position: fixed;
-}
 
 .heroSection{display:flex;gap:20px;padding:34px;align-items:center;justify-content:space-between}
 .heroContent{max-width:640px}
@@ -58,7 +65,7 @@ body::before{
   .nav{display:none}
 }
 
-/* === HACKER NEON MODE === */
+/* === FIXED HACKER NEON OVERLAY (NO LONGER COVERS CANVAS) === */
 body::before{
   content:"";
   position:fixed;
@@ -71,7 +78,7 @@ body::before{
     rgba(255,255,255,0.015) 3px
   );
   mix-blend-mode:overlay;
-  z-index:1;
+  z-index:-1; /* <<< FIXED */
 }
 
 .glow{
@@ -97,11 +104,12 @@ body::before{
   50%{ box-shadow:0 0 22px rgba(31,182,255,0.4); }
   100%{ box-shadow:0 0 0px rgba(31,182,255,0); }
 }
-/* QUANTUM BREACH BACKGROUND */
+
+/* ===== QUANTUM BACKGROUND NOW SAFELY BEHIND EVERYTHING ===== */
 .quantumBg{
   position:fixed;
   top:0;left:0;width:100%;height:100%;
-  z-index:-1;
+  z-index:-2; /* <<< FIXED */
   background:
     radial-gradient(circle at 50% 50%, rgba(127,91,255,0.25), transparent 70%),
     radial-gradient(circle at 80% 30%, rgba(31,182,255,0.25), transparent 60%),
@@ -114,6 +122,7 @@ body::before{
   50%{filter:blur(4px);}
   100%{filter:blur(0px);}
 }
+
 .terminal{
   background:#000814;
   padding:18px;
@@ -141,4 +150,3 @@ body::before{
   0%,50%{opacity:1;}
   50.01%,100%{opacity:0;}
 }
-
