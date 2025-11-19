@@ -8,12 +8,6 @@ import {
   Text,
   Float
 } from "@react-three/drei";
-import {
-  EffectComposer,
-  Bloom,
-  ChromaticAberration
-} from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
 
 // ---------------- AUTO THEME --------------------
 
@@ -133,7 +127,7 @@ function MatrixRain({ theme }) {
   );
 }
 
-// ---------------- WORMHOLE (spiral warp) --------------------
+// ---------------- WORMHOLE --------------------
 
 function Wormhole({ theme }) {
   const ref = useRef();
@@ -175,7 +169,7 @@ function FloatingText() {
   );
 }
 
-// ---------------- 3D LOGO (your asset orbiting) --------------------
+// ---------------- LOGO --------------------
 
 function X42Logo() {
   const ref = useRef();
@@ -186,7 +180,6 @@ function X42Logo() {
     ref.current.rotation.x = Math.sin(t * 0.3) * 0.3;
   });
 
-  // Replace with your GLB/Logo when you have one
   return (
     <mesh ref={ref} scale={1.4} position={[0, 0, 0]}>
       <icosahedronGeometry args={[1.2, 1]} />
@@ -201,7 +194,7 @@ function X42Logo() {
   );
 }
 
-// ---------------- CINEMATIC CAMERA 3.0 --------------------
+// ---------------- CAMERA --------------------
 
 function CinematicCamera() {
   const ref = useRef();
@@ -235,7 +228,7 @@ function CinematicCamera() {
   return <PerspectiveCamera ref={ref} makeDefault fov={54} position={[0, 0, 18]} />;
 }
 
-// ---------------- ROOT HERO CANVAS --------------------
+// ---------------- ROOT CANVAS --------------------
 
 export default function HeroCanvas() {
   const theme = useAutoTheme();
@@ -248,7 +241,7 @@ export default function HeroCanvas() {
         width: "100%",
         height: "100vh",
         background: theme === "day" ? "#ffffff" : "#000000",
-        transition: "background 0.6s ease-in-out",
+        transition: "background 0.6s ease-in-out"
       }}
     >
       <Suspense fallback={null}>
@@ -267,18 +260,6 @@ export default function HeroCanvas() {
           <Wormhole theme={theme} />
           <X42Logo />
           <FloatingText />
-
-          <EffectComposer>
-            <Bloom
-              intensity={1.6}
-              luminanceThreshold={0.15}
-              luminanceSmoothing={0.9}
-            />
-            <ChromaticAberration
-              offset={[0.0012, 0.0012]}
-              blendFunction={BlendFunction.ADD}
-            />
-          </EffectComposer>
 
           <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
         </Canvas>
