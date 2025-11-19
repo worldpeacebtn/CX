@@ -241,7 +241,8 @@ export default function HeroCanvas() {
         width: "100%",
         height: "100vh",
         background: theme === "day" ? "#ffffff" : "#000000",
-        transition: "background 0.6s ease-in-out"
+        transition: "background 0.6s ease-in-out",
+        pointerEvents: "none"
       }}
     >
       <Suspense fallback={null}>
