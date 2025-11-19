@@ -1,34 +1,24 @@
-import React, { Suspense, useMemo } from "react";
+import React, { useMemo, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Points, PointMaterial } from "@react-three/drei";
+import { Points, PointMaterial, OrbitControls } from "@react-three/drei";
 
 function Stars() {
-  // generate once, not on every render
-  const points = useMemo(() => {
-    return new Float32Array(
-      new Array(600)
-        .fill()
-        .flatMap(() => [
-          (Math.random() - 0.5) * 40,
-          (Math.random() - 0.5) * 20,
-          (Math.random() - 0.5) * 30,
-        ])
-    );
+  const positions = useMemo(() => {
+    const arr = new Float32Array(600 * 3);
+    for (let i = 0; i < arr.length; i += 3) {
+      arr[i] = (Math.random() - 0.5) * 40;   // x
+      arr[i + 1] = (Math.random() - 0.5) * 20; // y
+      arr[i + 2] = (Math.random() - 0.5) * 30; // z
+    }
+    return arr;
   }, []);
 
   return (
-    <Points limit={600} range={40}>
-      <bufferGeometry attach="geometry">
-        <bufferAttribute
-          attach="attributes-position"
-          array={points}
-          count={points.length / 3}
-          itemSize={3}
-        />
-      </bufferGeometry>
+    <Points positions={positions}>
       <PointMaterial
-        size={0.08}
-        color="#7f5bff"
+        transparent
+        size={0.1}
+        color="#9a6bff"
         sizeAttenuation
         depthWrite={false}
       />
@@ -41,15 +31,11 @@ export default function HeroCanvas() {
     <div className="heroCanvas" aria-hidden>
       <Suspense fallback={null}>
         <Canvas
-          frameloop="demand"
           dpr={[1, 2]}
           camera={{ position: [0, 0, 18], fov: 50 }}
         >
-          <ambientLight intensity={0.8} />
-          <directionalLight intensity={0.4} position={[10, 10, 5]} />
-
+          <ambientLight intensity={0.5} />
           <Stars />
-
           <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
         </Canvas>
       </Suspense>
