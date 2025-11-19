@@ -45,7 +45,22 @@ html, body {
 .ctaRow{margin-top:18px}
 .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;text-decoration:none;margin-right:8px}
 .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-.canvasArea{width:420px;height:280px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,rgba(15,21,40,0.6),rgba(4,9,20,0.3));box-shadow:0 10px 40px rgba(0,0,0,0.6);}
+.canvasArea {
+  width:420px;
+  height:280px;
+  min-width:420px;
+  min-height:280px;
+  display:block;
+  flex-shrink:0;
+  position:relative;
+  background:linear-gradient(180deg,rgba(15,21,40,0.6),rgba(4,9,20,0.3));
+  border-radius:12px;
+  overflow:hidden;
+}
+canvas {
+  display:block;
+}
+
 
 .intro{padding:20px 36px;border-top:1px solid rgba(255,255,255,0.02)}
 .page{padding:28px 36px}
