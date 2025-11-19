@@ -129,21 +129,46 @@ function Wormhole({ theme }) {
   );
 }
 
-// ---------------- CINEMATIC CAMERA --------------------
+// ---------------- ADVANCED CINEMATIC CAMERA --------------------
 
 function CinematicCamera() {
   const ref = useRef();
 
+  // store pointer for parallax
+  const pointer = useRef({ x: 0, y: 0 });
+
+  // listen to pointer movement — mobile safe
+  useFrame((state) => {
+    pointer.current.x = state.pointer.x;
+    pointer.current.y = state.pointer.y;
+  });
+
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-    ref.current.position.x = Math.sin(t * 0.1) * 0.5;
-    ref.current.position.y = Math.cos(t * 0.08) * 0.4;
+
+    // ---- MAIN BEZIER ORBITING MOTION ----
+    const radius = 0.85;
+    const x = Math.sin(t * 0.12) * radius;
+    const y = Math.cos(t * 0.09) * radius * 0.7;
+
+    // ---- PARALLAX BASED ON USER INPUT ----
+    const parallaxX = pointer.current.x * 0.3;
+    const parallaxY = pointer.current.y * 0.2;
+
+    // ---- MICRO QUANTUM SHAKE ----
+    const shakeX = Math.sin(t * 6.5) * 0.015;
+    const shakeY = Math.cos(t * 7.2) * 0.015;
+
+    ref.current.position.x = x + parallaxX + shakeX;
+    ref.current.position.y = y + parallaxY + shakeY;
+    ref.current.position.z = 18 + Math.sin(t * 0.2) * 0.3;
+
+    // always look center
     ref.current.lookAt(0, 0, 0);
   });
 
-  return <PerspectiveCamera ref={ref} makeDefault fov={55} position={[0, 0, 18]} />;
+  return <PerspectiveCamera ref={ref} makeDefault fov={54} position={[0, 0, 18]} />;
 }
-
 // ---------------- ROOT HERO CANVAS --------------------
 
 export default function HeroCanvas() {
