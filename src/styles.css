@@ -26,7 +26,10 @@ html,body,#root{height:100%;margin:0;font-family:Inter, system-ui, -apple-system
   position: relative;
   z-index: 2;
 }
-
+body::before{
+  z-index:-1; /* safely behind everything */
+  position: fixed;
+}
 
 .heroSection{display:flex;gap:20px;padding:34px;align-items:center;justify-content:space-between}
 .heroContent{max-width:640px}
