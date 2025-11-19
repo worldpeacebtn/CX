@@ -3,29 +3,46 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
 function Stars() {
-  const points = new Array(600).fill().map(() => [
-    (Math.random() - 0.5) * 40,
-    (Math.random() - 0.5) * 20,
-    (Math.random() - 0.5) * 30,
-  ]);
+  const positions = useMemo(() => {
+    const arr = new Float32Array(600 * 3);
+    for (let i = 0; i < arr.length; i += 3) {
+      arr[i] = (Math.random() - 0.5) * 40;
+      arr[i + 1] = (Math.random() - 0.5) * 20;
+      arr[i + 2] = (Math.random() - 0.5) * 30;
+    }
+    return arr;
+  }, []);
+
+  const ref = useRef();
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    const arr = ref.current.geometry.attributes.position.array;
+
+    for (let i = 0; i < arr.length; i += 3) {
+      // Quantum drift wave
+      arr[i + 1] += Math.sin(t + i) * 0.00015;
+      arr[i] += Math.cos(t * 0.3 + i) * 0.0001;
+
+      // Sparkle effect
+      if (Math.random() > 0.999) {
+        arr[i + 2] += (Math.random() - 0.5) * 0.3;
+      }
+    }
+
+    ref.current.geometry.attributes.position.needsUpdate = true;
+  });
 
   return (
-    <points>
-      <bufferGeometry attach="geometry">
-        <bufferAttribute
-          attach="attributes-position"
-          array={new Float32Array(points.flat())}
-          count={points.length}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        attach="material"
-        color="#7f5bff"
-        size={0.08}
+    <Points ref={ref} positions={positions}>
+      <PointMaterial
+        transparent
+        size={0.12}
+        color="#a47cff"
         sizeAttenuation
+        depthWrite={false}
       />
-    </points>
+    </Points>
   );
 }
 
