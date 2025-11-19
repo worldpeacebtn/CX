@@ -11,6 +11,21 @@ import TimelinePage from "./pages/TimelinePage";
 import AssetsPage from "./pages/AssetsPage";
 import ContactPage from "./pages/ContactPage";
 
+export default function App() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    requestAnimationFrame(() => setReady(true));
+  }, []);
+
+  if (!ready) return null; // prevents blue screen flash
+
+  return (
+    <Suspense fallback={null}>
+      <Scene />
+    </Suspense>
+  );
+}
 
 export default function App() {
   return (
