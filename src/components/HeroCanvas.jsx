@@ -6,29 +6,25 @@ import {
   PointMaterial,
   PerspectiveCamera,
   Text,
-  Float
+  Float,
+  MeshTransmissionMaterial
 } from "@react-three/drei";
 
 // ---------------- AUTO THEME --------------------
-
 function useAutoTheme() {
-  const isNight =
-    typeof window !== "undefined" &&
-    (window.matchMedia("(prefers-color-scheme: dark)").matches ||
-      new Date().getHours() >= 18 ||
-      new Date().getHours() <= 6);
-  return isNight ? "night" : "day";
+  const hour =
+    typeof window !== "undefined" ? new Date().getHours() : 20;
+  return hour >= 18 || hour <= 6 ? "night" : "day";
 }
 
 // ---------------- STARFIELD --------------------
-
 function Stars({ theme }) {
   const positions = useMemo(() => {
-    const arr = new Float32Array(1500 * 3);
+    const arr = new Float32Array(1800 * 3);
     for (let i = 0; i < arr.length; i += 3) {
-      arr[i] = (Math.random() - 0.5) * 80;
-      arr[i + 1] = (Math.random() - 0.5) * 40;
-      arr[i + 2] = (Math.random() - 0.5) * 60;
+      arr[i] = (Math.random() - 0.5) * 120;
+      arr[i + 1] = (Math.random() - 0.5) * 80;
+      arr[i + 2] = (Math.random() - 0.5) * 100;
     }
     return arr;
   }, []);
@@ -40,9 +36,11 @@ function Stars({ theme }) {
     const arr = ref.current.geometry.attributes.position.array;
 
     for (let i = 0; i < arr.length; i += 3) {
-      arr[i] += Math.sin(t + i) * 0.00008;
-      arr[i + 1] += Math.cos(t * 0.25 + i) * 0.00005;
-      if (Math.random() > 0.9994) arr[i + 2] += (Math.random() - 0.5) * 0.4;
+      arr[i] += Math.sin(t + i) * 0.0001;
+      arr[i + 1] += Math.cos(t * 0.25 + i) * 0.00008;
+
+      if (Math.random() > 0.9993)
+        arr[i + 2] += (Math.random() - 0.5) * 0.5;
     }
 
     ref.current.geometry.attributes.position.needsUpdate = true;
@@ -52,7 +50,7 @@ function Stars({ theme }) {
     <Points ref={ref} positions={positions}>
       <PointMaterial
         transparent
-        size={theme === "day" ? 0.08 : 0.14}
+        size={theme === "day" ? 0.09 : 0.14}
         color={theme === "day" ? "#6d4bff" : "#a47cff"}
         sizeAttenuation
         depthWrite={false}
@@ -61,107 +59,121 @@ function Stars({ theme }) {
   );
 }
 
-// ---------------- QUANTUM DUST --------------------
-
-function QuantumDust() {
-  const count = 600;
-  const positions = useMemo(() => {
-    const arr = new Float32Array(count * 3);
-    for (let i = 0; i < arr.length; i += 3) {
-      arr[i] = (Math.random() - 0.5) * 6;
-      arr[i + 1] = (Math.random() - 0.5) * 3.5;
-      arr[i + 2] = (Math.random() - 0.5) * 4;
-    }
-    return arr;
-  }, []);
-
-  const ref = useRef();
-
-  useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
-    ref.current.rotation.y = t * 0.08;
-    ref.current.rotation.x = Math.sin(t * 0.1) * 0.15;
-  });
+// ---------------- HOLOGRAPHIC CUBES --------------------
+function HoloCubes() {
+  const cubes = new Array(7).fill().map(() => ({
+    pos: [
+      (Math.random() - 0.5) * 6,
+      (Math.random() - 0.5) * 4,
+      (Math.random() - 0.5) * 5
+    ],
+    rotSpeed: Math.random() * 0.6 + 0.2
+  }));
 
   return (
-    <Points ref={ref} positions={positions}>
-      <PointMaterial size={0.03} color="#ffffff" transparent opacity={0.7} />
-    </Points>
+    <>
+      {cubes.map((c, i) => (
+        <HoloCube key={i} pos={c.pos} rotSpeed={c.rotSpeed} />
+      ))}
+    </>
   );
 }
 
-// ---------------- MATRIX RAIN (night only) --------------------
-
-function MatrixRain({ theme }) {
-  if (theme === "day") return null;
-
-  const num = 160;
-
-  const positions = useMemo(() => {
-    const arr = new Float32Array(num * 3);
-    for (let i = 0; i < arr.length; i += 3) {
-      arr[i] = (Math.random() - 0.5) * 25;
-      arr[i + 1] = Math.random() * 18;
-      arr[i + 2] = (Math.random() - 0.5) * 12;
-    }
-    return arr;
-  }, []);
-
-  const ref = useRef();
-
-  useFrame((_, delta) => {
-    const arr = ref.current.geometry.attributes.position.array;
-
-    for (let i = 0; i < arr.length; i += 3) {
-      arr[i + 1] -= delta * 3.4;
-      if (arr[i + 1] < -10) arr[i + 1] = 12 + Math.random() * 6;
-    }
-
-    ref.current.geometry.attributes.position.needsUpdate = true;
-  });
-
-  return (
-    <Points ref={ref} positions={positions}>
-      <PointMaterial size={0.07} color="#00ff95" transparent />
-    </Points>
-  );
-}
-
-// ---------------- WORMHOLE --------------------
-
-function Wormhole({ theme }) {
+function HoloCube({ pos, rotSpeed }) {
   const ref = useRef();
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
-    ref.current.rotation.z = t * 0.18;
-    ref.current.scale.x = 1 + Math.sin(t * 1.2) * 0.05;
-    ref.current.scale.y = 1 + Math.cos(t * 1.1) * 0.05;
+    const t = clock.getElapsedTime() * rotSpeed;
+    ref.current.rotation.x = t;
+    ref.current.rotation.y = t * 0.8;
   });
 
   return (
-    <mesh ref={ref} position={[0, 0, -6]}>
-      <torusGeometry args={[5, 0.3, 16, 180]} />
-      <meshBasicMaterial
-        wireframe
-        color={theme === "day" ? "#b9a3ff" : "#a020f0"}
-        transparent
-        opacity={theme === "day" ? 0.25 : 0.45}
+    <mesh ref={ref} position={pos} scale={0.6}>
+      <boxGeometry args={[1, 1, 1]} />
+      <MeshTransmissionMaterial
+        samples={8}
+        thickness={0.8}
+        roughness={0.1}
+        transmission={1}
+        chromaticAberration={0.25}
+        anisotropy={0.4}
+        iridescence={1}
+        iridescenceIOR={1.4}
+        color="#8b5cf6"
       />
     </mesh>
   );
 }
 
-// ---------------- FLOATING 3D TEXT --------------------
+// ---------------- QUANTUM DUST --------------------
+function QuantumDust() {
+  const count = 600;
+  const positions = useMemo(() => {
+    const arr = new Float32Array(count * 3);
+    for (let i = 0; i < arr.length; i += 3) {
+      arr[i] = (Math.random() - 0.5) * 8;
+      arr[i + 1] = (Math.random() - 0.5) * 6;
+      arr[i + 2] = (Math.random() - 0.5) * 6;
+    }
+    return arr;
+  }, []);
 
+  const ref = useRef();
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    ref.current.rotation.y = t * 0.12;
+    ref.current.rotation.x = Math.sin(t * 0.14) * 0.2;
+  });
+
+  return (
+    <Points ref={ref} positions={positions}>
+      <PointMaterial
+        size={0.032}
+        color="#ffffff"
+        transparent
+        opacity={0.55}
+      />
+    </Points>
+  );
+}
+
+// ---------------- WORMHOLE --------------------
+function Wormhole({ theme }) {
+  const ref = useRef();
+
+  useFrame(({ clock }) => {
+    const t = clock.getElapsedTime();
+    ref.current.rotation.z = t * 0.25;
+    ref.current.scale.x = 1 + Math.sin(t * 1.2) * 0.06;
+    ref.current.scale.y = 1 + Math.cos(t * 1.1) * 0.06;
+  });
+
+  return (
+    <mesh ref={ref} position={[0, 0, -7]}>
+      <torusGeometry args={[6, 0.35, 16, 200]} />
+      <meshBasicMaterial
+        wireframe
+        color={theme === "day" ? "#bba7ff" : "#8a2be2"}
+        opacity={0.35}
+        transparent
+      />
+    </mesh>
+  );
+}
+
+// ---------------- FLOATING TEXT --------------------
 function FloatingText() {
   return (
-    <Float speed={1.6} rotationIntensity={0.4} floatIntensity={0.5}>
+    <Float speed={1.8} rotationIntensity={0.6} floatIntensity={0.7}>
       <Text
         color="#ffffff"
-        fontSize={0.7}
-        position={[0, 1.8, 0]}
-        letterSpacing={0.04}
+        fontSize={0.72}
+        position={[0, 2.1, 0]}
+        letterSpacing={0.05}
+        anchorX="center"
+        anchorY="middle"
       >
         X42 QUANTUM DIVISION
       </Text>
@@ -169,33 +181,30 @@ function FloatingText() {
   );
 }
 
-// ---------------- LOGO --------------------
-
+// ---------------- CENTER LOGO --------------------
 function X42Logo() {
   const ref = useRef();
-
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-    ref.current.rotation.y = t * 0.7;
-    ref.current.rotation.x = Math.sin(t * 0.3) * 0.3;
+    ref.current.rotation.y = t * 0.8;
+    ref.current.rotation.x = Math.sin(t * 0.35) * 0.4;
   });
 
   return (
-    <mesh ref={ref} scale={1.4} position={[0, 0, 0]}>
-      <icosahedronGeometry args={[1.2, 1]} />
+    <mesh ref={ref} scale={1.5}>
+      <icosahedronGeometry args={[1.3, 1]} />
       <meshStandardMaterial
-        color="#8b5cf6"
-        emissive="#b983ff"
-        emissiveIntensity={1.5}
-        roughness={0.1}
-        metalness={0.8}
+        color="#9d72ff"
+        emissive="#c8a8ff"
+        emissiveIntensity={2.1}
+        metalness={0.9}
+        roughness={0.07}
       />
     </mesh>
   );
 }
 
 // ---------------- CAMERA --------------------
-
 function CinematicCamera() {
   const ref = useRef();
   const pointer = useRef({ x: 0, y: 0 });
@@ -208,28 +217,27 @@ function CinematicCamera() {
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
 
-    const radius = 0.85;
-    const x = Math.sin(t * 0.12) * radius;
-    const y = Math.cos(t * 0.09) * radius * 0.7;
+    const radius = 1.1;
+    const baseX = Math.sin(t * 0.11) * radius;
+    const baseY = Math.cos(t * 0.09) * radius * 0.7;
 
-    const parallaxX = pointer.current.x * 0.3;
-    const parallaxY = pointer.current.y * 0.2;
+    const parallaxX = pointer.current.x * 0.35;
+    const parallaxY = pointer.current.y * 0.22;
 
-    const shakeX = Math.sin(t * 6.5) * 0.015;
-    const shakeY = Math.cos(t * 7.2) * 0.015;
+    const shakeX = Math.sin(t * 6.8) * 0.018;
+    const shakeY = Math.cos(t * 7.7) * 0.018;
 
-    ref.current.position.x = x + parallaxX + shakeX;
-    ref.current.position.y = y + parallaxY + shakeY;
-    ref.current.position.z = 18 + Math.sin(t * 0.2) * 0.3;
+    ref.current.position.x = baseX + parallaxX + shakeX;
+    ref.current.position.y = baseY + parallaxY + shakeY;
+    ref.current.position.z = 19 + Math.sin(t * 0.25) * 0.4;
 
     ref.current.lookAt(0, 0, 0);
   });
 
-  return <PerspectiveCamera ref={ref} makeDefault fov={54} position={[0, 0, 18]} />;
+  return <PerspectiveCamera ref={ref} makeDefault fov={55} />;
 }
 
 // ---------------- ROOT CANVAS --------------------
-
 export default function HeroCanvas() {
   const theme = useAutoTheme();
 
@@ -240,29 +248,30 @@ export default function HeroCanvas() {
       style={{
         width: "100%",
         height: "100vh",
-        background: theme === "day" ? "#ffffff" : "#000000",
-        transition: "background 0.6s ease-in-out",
-        pointerEvents: "none"
+        pointerEvents: "none",
+        background:
+          theme === "day"
+            ? "rgba(255,255,255,0.15)"
+            : "rgba(0,0,0,0.15)",
+        backdropFilter: "blur(4px)",
+        transition: "background 0.6s ease"
       }}
     >
       <Suspense fallback={null}>
-        <Canvas dpr={[1, 2]} gl={{ antialias: true }}>
+        <Canvas dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
           <CinematicCamera />
 
-          <ambientLight intensity={theme === "day" ? 1.2 : 0.4} />
-          <directionalLight
-            intensity={theme === "day" ? 0.6 : 0.3}
-            position={[10, 10, 5]}
-          />
+          <ambientLight intensity={0.9} />
+          <directionalLight intensity={0.5} position={[5, 5, 5]} />
 
           <Stars theme={theme} />
           <QuantumDust />
-          <MatrixRain theme={theme} />
+          <HoloCubes />
           <Wormhole theme={theme} />
           <X42Logo />
           <FloatingText />
 
-          <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+          <OrbitControls enableZoom={false} enableRotate={false} enablePan={false} />
         </Canvas>
       </Suspense>
     </div>
