@@ -8,9 +8,6 @@ import TimelinePage from "./pages/TimelinePage";
 import AssetsPage from "./pages/AssetsPage";
 import ContactPage from "./pages/ContactPage";
 
-export default function App() {
-  const [ready, setReady] = useState(false);
-
 
 export default function App() {
   return (
