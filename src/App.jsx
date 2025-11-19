@@ -8,8 +8,6 @@ import TimelinePage from "./pages/TimelinePage";
 import AssetsPage from "./pages/AssetsPage";
 import ContactPage from "./pages/ContactPage";
 
-import './style.css';
-
 
 export default function App() {
   return (
