@@ -42,6 +42,9 @@ export default function App() {
                       <Link className="btn" to="/slides">Read Brief</Link>
                       <Link className="btn ghost" to="/contact">Secure Contact</Link>
                     </div>
+                    
+                    <div className="quantumBg"></div>
+                    
                   </div>
                   <div className="canvasArea">
                     <HeroCanvas />
