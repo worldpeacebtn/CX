@@ -1,11 +1,16 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
+
+import { Suspense, useEffect, useState } from "react";
+import Scene from "./Scene";
+
 import HeroCanvas from "./components/HeroCanvas";
 import Logo from "./components/Logo";
 import SlidesPage from "./pages/SlidesPage";
 import TimelinePage from "./pages/TimelinePage";
 import AssetsPage from "./pages/AssetsPage";
 import ContactPage from "./pages/ContactPage";
+
 
 export default function App() {
   return (
