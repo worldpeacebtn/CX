@@ -1,0 +1,49 @@
+:root{
+  --bg:#06081a;
+  --deep:#07102a;
+  --accent:#7f5bff;
+  --accent2:#1fb6ff;
+  --muted:#9aa8c7;
+  --glass: rgba(255,255,255,0.04);
+  --card-bg: rgba(255,255,255,0.02);
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Helvetica Neue', Arial;color:#eaf0ff;background:linear-gradient(180deg,var(--bg),var(--deep));}
+
+.app{display:flex;flex-direction:column;min-height:100vh;}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,rgba(0,0,0,0.15),transparent);backdrop-filter: blur(6px);}
+.brandRow{display:flex;align-items:center;gap:12px}
+.logoSmall{width:48px;height:48px}
+.brandText .brandTitle{font-weight:700;color:var(--accent);letter-spacing:1px}
+.brandText .brandSub{font-size:12px;color:var(--muted)}
+
+.nav a{color:var(--muted);margin-left:14px;text-decoration:none}
+.nav a:hover{color:var(--accent2)}
+
+.heroSection{display:flex;gap:20px;padding:34px;align-items:center;justify-content:space-between}
+.heroContent{max-width:640px}
+.heroContent h1{font-size:36px;margin:0;color:#f3f6ff;letter-spacing:0.6px}
+.lead{color:var(--muted);margin-top:8px}
+.ctaRow{margin-top:18px}
+.btn{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;text-decoration:none;margin-right:8px}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+.canvasArea{width:420px;height:280px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,rgba(15,21,40,0.6),rgba(4,9,20,0.3));box-shadow:0 10px 40px rgba(0,0,0,0.6);}
+
+.intro{padding:20px 36px;border-top:1px solid rgba(255,255,255,0.02)}
+.page{padding:28px 36px}
+.card{background:var(--card-bg);padding:18px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(127,91,255,0.08)}
+.card h2{margin:0;color:var(--accent)}
+.muted{color:var(--muted);margin-top:6px}
+.timeline{padding-left:18px}
+.assetsTable{width:100%;border-collapse:collapse;margin-top:12px}
+.assetsTable th, .assetsTable td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left}
+.hint{color:var(--muted);font-size:13px;margin-top:12px}
+.foot{padding:18px;text-align:center;color:var(--muted);margin-top:auto}
+
+/* small screens */
+@media (max-width:880px){
+  .heroSection{flex-direction:column}
+  .canvasArea{width:100%;height:220px}
+  .nav{display:none}
+}
