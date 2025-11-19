@@ -4,18 +4,29 @@ import {
   OrbitControls,
   Points,
   PointMaterial,
-  PerspectiveCamera,
+  PerspectiveCamera
 } from "@react-three/drei";
 
-// ---------------- PARALLAX STARFIELD --------------------
+// ---------------- THEME DETECTION --------------------
 
-function ParallaxStars({ count, spread, speed, size, color }) {
+function useAutoTheme() {
+  const isNight = typeof window !== "undefined" && (
+    window.matchMedia("(prefers-color-scheme: dark)").matches ||
+    new Date().getHours() >= 18 ||
+    new Date().getHours() <= 6
+  );
+  return isNight ? "night" : "day";
+}
+
+// ---------------- STARFIELD --------------------
+
+function Stars({ theme }) {
   const positions = useMemo(() => {
-    const arr = new Float32Array(count * 3);
+    const arr = new Float32Array(1500 * 3);
     for (let i = 0; i < arr.length; i += 3) {
-      arr[i] = (Math.random() - 0.5) * spread[0];
-      arr[i + 1] = (Math.random() - 0.5) * spread[1];
-      arr[i + 2] = (Math.random() - 0.5) * spread[2];
+      arr[i]   = (Math.random() - 0.5) * 80;
+      arr[i+1] = (Math.random() - 0.5) * 40;
+      arr[i+2] = (Math.random() - 0.5) * 60;
     }
     return arr;
   }, []);
@@ -27,9 +38,12 @@ function ParallaxStars({ count, spread, speed, size, color }) {
     const arr = ref.current.geometry.attributes.position.array;
 
     for (let i = 0; i < arr.length; i += 3) {
-      arr[i] += Math.sin(t * 0.2 + arr[i]) * speed[0];
-      arr[i + 1] += Math.cos(t * 0.15 + arr[i + 1]) * speed[1];
-      arr[i + 2] += Math.sin(t * 0.1 + arr[i + 2]) * speed[2];
+      arr[i]   += Math.sin(t + i) * 0.00008;
+      arr[i+1] += Math.cos(t * 0.25 + i) * 0.00005;
+
+      if (Math.random() > 0.9994) {
+        arr[i+2] += (Math.random() - 0.5) * 0.4;
+      }
     }
 
     ref.current.geometry.attributes.position.needsUpdate = true;
@@ -39,8 +53,8 @@ function ParallaxStars({ count, spread, speed, size, color }) {
     <Points ref={ref} positions={positions}>
       <PointMaterial
         transparent
-        size={size}
-        color={color}
+        size={theme === "day" ? 0.08 : 0.14}
+        color={theme === "day" ? "#6d4bff" : "#a47cff"}
         sizeAttenuation
         depthWrite={false}
       />
@@ -48,62 +62,68 @@ function ParallaxStars({ count, spread, speed, size, color }) {
   );
 }
 
-// ---------------- QUANTUM NODES (floating rotating particles) --------------------
+// ---------------- MATRIX RAIN (Night-Only) --------------------
 
-function QuantumNodes() {
-  const num = 20;
-  const ref = useRef();
+function MatrixRain({ theme }) {
+  if (theme === "day") return null;
+
+  const num = 160;
 
   const positions = useMemo(() => {
     const arr = new Float32Array(num * 3);
     for (let i = 0; i < arr.length; i += 3) {
-      arr[i] = (Math.random() - 0.5) * 10;
-      arr[i + 1] = (Math.random() - 0.5) * 6;
-      arr[i + 2] = (Math.random() - 0.5) * 10;
+      arr[i] = (Math.random() - 0.5) * 25;
+      arr[i+1] = Math.random() * 18;
+      arr[i+2] = (Math.random() - 0.5) * 12;
     }
     return arr;
   }, []);
 
-  useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
-    ref.current.rotation.y = t * 0.25;
-    ref.current.rotation.x = t * 0.1;
+  const ref = useRef();
+
+  useFrame((_, delta) => {
+    const arr = ref.current.geometry.attributes.position.array;
+
+    for (let i = 0; i < arr.length; i += 3) {
+      arr[i+1] -= delta * 3.4;
+
+      if (arr[i+1] < -10) {
+        arr[i+1] = 12 + Math.random() * 6;
+      }
+    }
+
+    ref.current.geometry.attributes.position.needsUpdate = true;
   });
 
   return (
-    <group ref={ref}>
-      <Points positions={positions}>
-        <PointMaterial
-          color="#9f7cff"
-          size={0.35}
-          transparent
-          opacity={0.9}
-          sizeAttenuation
-        />
-      </Points>
-    </group>
+    <Points ref={ref} positions={positions}>
+      <PointMaterial
+        size={0.07}
+        color="#00ff95"
+        transparent
+        sizeAttenuation
+      />
+    </Points>
   );
 }
 
-// ---------------- ENERGY WAVE --------------------
+// ---------------- WORMHOLE (Night) / GLOW (Day) --------------------
 
-function EnergyWave() {
+function Wormhole({ theme }) {
   const ref = useRef();
-
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-    ref.current.scale.x = 1 + Math.sin(t * 0.8) * 0.2;
-    ref.current.scale.y = 1 + Math.cos(t * 0.6) * 0.2;
-    ref.current.rotation.z = t * 0.1;
+    if (ref.current) ref.current.rotation.z = t * 0.12;
   });
 
   return (
-    <mesh ref={ref} position={[0, -1, -3]}>
-      <ringGeometry args={[3.2, 3.35, 64]} />
+    <mesh ref={ref} position={[0, 0, -6]}>
+      <torusGeometry args={[5, 0.25, 16, 100]} />
       <meshBasicMaterial
-        color="#6b4bff"
+        wireframe
+        color={theme === "day" ? "#b9a3ff" : "#a020f0"}
         transparent
-        opacity={0.25}
+        opacity={theme === "day" ? 0.25 : 0.45}
       />
     </mesh>
   );
@@ -116,61 +136,40 @@ function CinematicCamera() {
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-    ref.current.position.x = Math.sin(t * 0.08) * 0.6;
-    ref.current.position.y = Math.cos(t * 0.06) * 0.4;
+    ref.current.position.x = Math.sin(t * 0.1) * 0.5;
+    ref.current.position.y = Math.cos(t * 0.08) * 0.4;
     ref.current.lookAt(0, 0, 0);
   });
 
-  return (
-    <PerspectiveCamera
-      ref={ref}
-      makeDefault
-      fov={45}
-      position={[0, 0, 16]}
-    />
-  );
+  return <PerspectiveCamera ref={ref} makeDefault fov={55} position={[0, 0, 18]} />;
 }
 
-// ---------------- HERO CANVAS --------------------
+// ---------------- ROOT HERO CANVAS --------------------
 
 export default function HeroCanvas() {
+  const theme = useAutoTheme(); // ← Auto-switch Day/Night
+
   return (
-    <div className="heroCanvas" aria-hidden>
+    <div
+      className="heroCanvas"
+      aria-hidden
+      style={{
+        width: "100%",
+        height: "100vh",
+        background: theme === "day" ? "#ffffff" : "#000000",
+        transition: "background 0.6s ease-in-out"
+      }}
+    >
       <Suspense fallback={null}>
         <Canvas dpr={[1, 2]} gl={{ antialias: true }}>
           <CinematicCamera />
-          <ambientLight intensity={0.4} />
-          <directionalLight intensity={0.4} position={[10, 10, 5]} />
 
-          {/* Deep space background */}
-          <ParallaxStars
-            count={900}
-            spread={[80, 50, 60]}
-            speed={[0.0001, 0.00005, 0.00002]}
-            size={0.1}
-            color="#5a3aff"
-          />
+          <ambientLight intensity={theme === "day" ? 1.2 : 0.4} />
+          <directionalLight intensity={theme === "day" ? 0.6 : 0.3} position={[10, 10, 5]} />
 
-          {/* Mid space */}
-          <ParallaxStars
-            count={600}
-            spread={[50, 30, 40]}
-            speed={[0.00025, 0.0002, 0.0001]}
-            size={0.12}
-            color="#a47cff"
-          />
-
-          {/* Foreground particles */}
-          <ParallaxStars
-            count={250}
-            spread={[20, 12, 20]}
-            speed={[0.0005, 0.0005, 0.0003]}
-            size={0.18}
-            color="#d4b3ff"
-          />
-
-          <QuantumNodes />
-          <EnergyWave />
+          <Stars theme={theme} />
+          <MatrixRain theme={theme} />
+          <Wormhole theme={theme} />
 
           <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
         </Canvas>
