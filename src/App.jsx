@@ -31,13 +31,13 @@ export default function App() {
       </header>
 
       <main>
- <div className="quantumBg"></div>
         <Routes>
           <Route
             path="/"
             element={
               <>
                 <section className="heroSection">
+                   <div className="quantumBg"></div>
                   <div className="heroContent">
                     <h1>Witness X — Operation X42</h1>
                     <p className="lead">Preliminary public disclosure — Safety, legal preservation & documentation.</p>
