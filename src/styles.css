@@ -173,7 +173,7 @@ html, body {
 /* ===== HUD MENU ===== */
 .hudMenu {
   position: fixed;
-  top: 50%;
+  bottom: 0%;
   right: 1rem;
   transform: translateY(-50%);
   display: flex;
