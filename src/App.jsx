@@ -8,9 +8,11 @@ import TimelinePage from "./pages/TimelinePage";
 import AssetsPage from "./pages/AssetsPage";
 import ContactPage from "./pages/ContactPage";
 
+import QuantumBg from './components/QuantumBg';
 
 export default function App() {
   return (
+          <QuantumBg /> {/* Always at the top so it’s behind all content */}
     <div className="app">
       <header className="topbar">
         <div className="brandRow">
