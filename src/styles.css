@@ -82,9 +82,96 @@ html, body {
   letter-spacing: 0.05em;
 }
 
-/* ===== FIXED RIGHT SIDE HOLO HUD MENU ===== */
-/* ===== FIXED RIGHT SIDE MENU (DESKTOP) ===== */
-.fixedMenu {
+/* ===== FULL SCREEN HUD ===== */
+.hudOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* allow clicks through */
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2rem;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+/* ===== HUD BORDER ANIMATION ===== */
+.hudOverlay::before,
+.hudOverlay::after,
+.hudOverlay .hudTop,
+.hudOverlay .hudBottom {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  border-radius: 4px;
+}
+
+.hudOverlay::before,
+.hudOverlay::after {
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #7f5bff, #1fb6ff, #7f5bff);
+  animation: gradientSlide 4s infinite alternate;
+}
+
+.hudOverlay::before { left: 0; }
+.hudOverlay::after { right: 0; }
+
+.hudOverlay .hudTop,
+.hudOverlay .hudBottom {
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #7f5bff, #1fb6ff, #7f5bff);
+  animation: gradientSlide 4s infinite alternate;
+}
+
+.hudOverlay .hudTop { top: 0; }
+.hudOverlay .hudBottom { bottom: 0; }
+
+/* sliding gradient animation */
+@keyframes gradientSlide {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== HUD INFO (PAGE TITLE + SUBTITLE) ===== */
+.hudInfo {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #ffffffcc;
+  font-family: "JetBrains Mono", monospace;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+.hudInfo .title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #7f5bff, #1fb6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 8px #7f5bff, 0 0 16px #1fb6ff;
+}
+
+.hudInfo .subtitle {
+  font-size: 1rem;
+  color: var(--muted);
+  text-shadow: 0 0 4px rgba(127,91,255,0.4);
+  margin-top: 2px;
+}
+
+/* ===== INTEGRATED HUD MENU (RIGHT SIDE DESKTOP) ===== */
+.hudMenu {
   position: fixed;
   top: 50%;
   right: 1rem;
@@ -92,81 +179,49 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  background: rgba(12,8,32,0.55);
-  backdrop-filter: blur(14px);
-  border-left: 2px solid rgba(127,91,255,0.45);
+  background: rgba(12,8,32,0.6);
+  backdrop-filter: blur(12px);
+  border-left: 2px solid rgba(127,91,255,0.35);
   padding: 16px 20px;
   border-radius: 12px 0 0 12px;
-  z-index: 999;
-  box-shadow: 0 0 16px rgba(127,91,255,0.4), 0 0 28px rgba(31,182,255,0.25);
-  animation: hudGlow 3s infinite alternate;
+  z-index: 1002;
 }
 
-.fixedMenu a {
+.hudMenu a {
   color: var(--muted);
   text-decoration: none;
   font-weight: 600;
   padding: 10px 14px;
-  border-radius: 10px;
+  border-radius: 8px;
   transition: all 0.3s ease-in-out;
 }
 
-.fixedMenu a:hover {
+.hudMenu a:hover {
   color: #fff;
   text-shadow: 0 0 12px var(--accent2), 0 0 24px var(--accent);
   transform: translateX(-6px);
   background: rgba(127,91,255,0.08);
 }
 
-/* subtle pulsing glow */
-@keyframes hudGlow {
-  0% { box-shadow: 0 0 12px rgba(127,91,255,0.3), 0 0 20px rgba(31,182,255,0.15); }
-  50% { box-shadow: 0 0 20px rgba(127,91,255,0.5), 0 0 28px rgba(31,182,255,0.25); }
-  100% { box-shadow: 0 0 12px rgba(127,91,255,0.3), 0 0 20px rgba(31,182,255,0.15); }
-}
-
-/* ===== HUD STATUS BAR (VISIBLE) ===== */
-.hudBar {
-  position: fixed;
-  bottom: 0.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 85%;
-  height: 6px;
-  background: linear-gradient(90deg, #7f5bff, #1fb6ff);
-  border-radius: 3px;
-  box-shadow: 0 0 20px rgba(127,91,255,0.6), 0 0 32px rgba(31,182,255,0.35);
-  animation: hudBarPulse 2s infinite alternate;
-  z-index: 998;
-}
-
-@keyframes hudBarPulse {
-  0% { box-shadow: 0 0 16px rgba(127,91,255,0.5), 0 0 28px rgba(31,182,255,0.3); }
-  50% { box-shadow: 0 0 28px rgba(127,91,255,0.7), 0 0 40px rgba(31,182,255,0.4); }
-  100% { box-shadow: 0 0 16px rgba(127,91,255,0.5), 0 0 28px rgba(31,182,255,0.3); }
-}
-
-/* ===== MOBILE RESPONSIVE ===== */
+/* ===== MOBILE HUD (BOTTOM) ===== */
 @media (max-width: 880px) {
-  .fixedMenu {
-    top: auto;
+  .hudMenu {
+    flex-direction: row;
     bottom: 3rem;
+    top: auto;
     right: 50%;
     transform: translateX(50%);
-    flex-direction: row;
     border-radius: 12px;
-    padding: 8px 12px;
     gap: 8px;
   }
 
-  .fixedMenu a {
+  .hudMenu a {
     padding: 6px 10px;
     font-size: 0.95rem;
   }
 
-  .hudBar {
-    width: 90%;
-    height: 4px;
+  .hudOverlay .hudBottom {
+    height: 6px;
   }
 }
 .heroContent p {
