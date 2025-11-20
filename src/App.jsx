@@ -24,14 +24,24 @@ export default function App() {
           </div>
         </div>
 
-        <nav className="fixedMenu">
+<div className="hudOverlay">
+  <div className="hudTop"></div>
+  <div className="hudBottom"></div>
+</div>
+
+<div className="hudInfo">
+  <div className="title">X42 OPERATION</div>
+  <div className="subtitle">Quantum Division Interface</div>
+</div>
+
+<nav className="hudMenu">
           <Link to="/">Home</Link>
           <Link to="/slides">Brief</Link>
           <Link to="/timeline">Timeline</Link>
           <Link to="/assets">Assets</Link>
           <Link to="/contact">Contact</Link>
         </nav>
-        <div className="hudBar"></div>
+        *{//<div className="hudBar"></div>}
       </header>
 
       <main>
