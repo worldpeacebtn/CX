@@ -38,10 +38,41 @@ html, body {
 .nav a{color:var(--muted);margin-left:14px;text-decoration:none}
 .nav a:hover{color:var(--accent2)}
 
-.heroSection{display:flex;gap:20px;padding:34px;align-items:center;justify-content:space-between}
-.heroContent{max-width:640px}
-.heroContent h1{font-size:36px;margin:0;color:#f3f6ff;letter-spacing:0.6px}
-.lead{color:var(--muted);margin-top:8px}
+.canvasArea {
+  display: none; /* optional: HeroCanvas now handles background */
+}
+
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 2rem;
+  z-index: 1; /* above canvas */
+  color: #f3f6ff;
+}
+
+.heroContent h1 {
+  font-size: 3rem;
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent2);
+}
+
+.heroContent p {
+  color: var(--muted);
+  font-size: 1.2rem;
+  text-shadow: 0 0 4px rgba(127,91,255,0.3);
+}
+
+.btn {
+  text-shadow: 0 0 6px rgba(255,255,255,0.4);
+  transition: all 0.25s ease;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px var(--accent2);
+}
+
 .ctaRow{margin-top:18px}
 .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:white;text-decoration:none;margin-right:8px}
 .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
