@@ -13,13 +13,15 @@ import QuantumBg from './components/QuantumBg';
 export default function App() {
   return (
     <>
-      {/* BACKGROUND LAYERS: heroCanvas + QuantumBg */}
-      <QuantumBg style={{ position: "fixed", inset: 0, zIndex: 0 }} />
-      <HeroCanvas style={{ position: "fixed", inset: 0, zIndex: 1 }} />
+<>
+  {/* BACKGROUND */}
+  <QuantumBg style={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }} />
+  <HeroCanvas style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }} />
 
-      {/* APP CONTENT */}
-      <div className="appWrapper" style={{ position: "relative", zIndex: 2, minHeight: "100vh" }}>
-        {/* HUD */}
+  {/* APP */}
+  <div className="appWrapper" style={{ position: "relative", zIndex: 1, minHeight: "100vh" }}>
+    {/* HUD + Main content */}
+
         <div className="hudViewport">
           <div className="hudOverlay">
             <div className="edge top" />
