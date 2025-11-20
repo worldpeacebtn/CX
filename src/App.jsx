@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
 import HeroCanvas from "./components/HeroCanvas";
-import Logo from "./components/Logo";
 import SlidesPage from "./pages/SlidesPage";
 import TimelinePage from "./pages/TimelinePage";
 import AssetsPage from "./pages/AssetsPage";
@@ -13,15 +12,14 @@ import QuantumBg from './components/QuantumBg';
 export default function App() {
   return (
     <>
-<>
-  {/* BACKGROUND */}
-  <QuantumBg style={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }} />
-  <HeroCanvas style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }} />
+      {/* BACKGROUND LAYERS */}
+      <QuantumBg style={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }} />
+      <HeroCanvas style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }} />
 
-  {/* APP */}
-  <div className="appWrapper" style={{ position: "relative", zIndex: 1, minHeight: "100vh" }}>
-    {/* HUD + Main content */}
-
+      {/* APP CONTENT */}
+      <div className="appWrapper" style={{ position: "relative", zIndex: 1, minHeight: "100vh" }}>
+        
+        {/* HUD */}
         <div className="hudViewport">
           <div className="hudOverlay">
             <div className="edge top" />
@@ -66,24 +64,20 @@ export default function App() {
         </div>
 
         {/* PAGE CONTENT */}
-        <main style={{ position: "relative", zIndex: 2 }}>
+        <main style={{ position: "relative", zIndex: 1 }}>
           <Routes>
             <Route
               path="/"
               element={
-                <section className="heroSection" style={{ minHeight: "100vh", position: "relative", zIndex: 2 }}>
+                <section className="heroSection">
                   <div className="heroContent">
                     <h1>Witness X — Operation X42</h1>
                     <p className="lead">
                       Preliminary public disclosure — Safety, legal preservation & documentation.
                     </p>
                     <div className="ctaRow">
-                      <Link className="btn" to="/slides">
-                        Read Brief
-                      </Link>
-                      <Link className="btn ghost" to="/contact">
-                        Secure Contact
-                      </Link>
+                      <Link className="btn" to="/slides">Read Brief</Link>
+                      <Link className="btn ghost" to="/contact">Secure Contact</Link>
                     </div>
                   </div>
                 </section>
@@ -96,7 +90,7 @@ export default function App() {
           </Routes>
         </main>
 
-        <footer className="foot" style={{ zIndex: 3, position: "relative" }}>
+        <footer className="foot">
           <small>Operation X42 • Vorläufige Teilausgabe • Sicherheit ist Pflicht</small>
         </footer>
       </div>
