@@ -1,6 +1,6 @@
 import React from "react";
 import assets from "../data/assets";
-import QuantumBg from './components/QuantumBg';
+
 
 export default function AssetsPage() {
   return (
