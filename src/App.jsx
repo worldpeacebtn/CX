@@ -13,8 +13,8 @@ export default function App() {
   return (
     <>
       {/* BACKGROUND LAYERS */}
-      <QuantumBg style={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }} />
-      <HeroCanvas style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }} />
+      <QuantumBg style={{ position: "fixed", inset: 0, zIndex: -2, pointerEvents: "none" }} />
+      <HeroCanvas style={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }} />
 
       {/* APP CONTENT */}
       <div className="appWrapper" style={{ position: "relative", zIndex: 1, minHeight: "100vh" }}>
