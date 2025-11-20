@@ -12,79 +12,78 @@ import QuantumBg from './components/QuantumBg';
 
 export default function App() {
   return (
-    <>
-      <QuantumBg /> {/* Always at the back */}
+    <div className="appWrapper" style={{ position: "relative", minHeight: "100vh" }}>
+      {/* Quantum background */}
+      <QuantumBg style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: -1 }} />
 
-      <div className="app">
-        {/* HUD / Header */}
-        <header className="topbar">
-          <div className="brandRow">
-            <Logo className="logoSmall" />
-            <div className="brandText">
-              <div className="brandTitle">Operation X42</div>
-              <div className="brandSub">Witness X — Quantum Hack Division</div>
-            </div>
+      {/* HUD / Header */}
+      <header className="topbar" style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 10 }}>
+        <div className="brandRow">
+          <Logo className="logoSmall" />
+          <div className="brandText">
+            <div className="brandTitle">Operation X42</div>
+            <div className="brandSub">Witness X — Quantum Hack Division</div>
           </div>
+        </div>
 
-          <div className="hudOverlay">
-            <div className="leftEdge"></div>
-            <div className="rightEdge"></div>
-          </div>
+        <div className="hudOverlay">
+          <div className="leftEdge"></div>
+          <div className="rightEdge"></div>
+        </div>
 
-          <div className="hudInfo">
-            <div className="title">X42 QUANTUM OPERATION</div>
-            <div className="subtitle">Holo Interface Active</div>
-          </div>
+        <div className="hudInfo">
+          <div className="title">X42 QUANTUM OPERATION</div>
+          <div className="subtitle">Holo Interface Active</div>
+        </div>
 
-          <nav className="hudMenu">
-            <Link to="/">Home</Link>
-            <Link to="/slides">Brief</Link>
-            <Link to="/timeline">Timeline</Link>
-            <Link to="/assets">Assets</Link>
-            <Link to="/contact">Contact</Link>
-          </nav>
-        </header>
+        <nav className="hudMenu">
+          <Link to="/">Home</Link>
+          <Link to="/slides">Brief</Link>
+          <Link to="/timeline">Timeline</Link>
+          <Link to="/assets">Assets</Link>
+          <Link to="/contact">Contact</Link>
+        </nav>
+      </header>
 
-        {/* Page Content */}
-        <main>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <section className="heroSection">
-                    <div className="quantumBg"></div>
-                    <div className="heroContent">
-                      <h1>Witness X — Operation X42</h1>
-                      <p className="lead">Preliminary public disclosure — Safety, legal preservation & documentation.</p>
-                      <div className="ctaRow">
-                        <Link className="btn" to="/slides">Read Brief</Link>
-                        <Link className="btn ghost" to="/contact">Secure Contact</Link>
-                      </div>
+      {/* Page Content */}
+      <main style={{ paddingTop: "120px" }}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <section className="heroSection" style={{ minHeight: "100vh", position: "relative" }}>
+                  <div className="quantumBg"></div>
+                  <div className="heroContent">
+                    <h1>Witness X — Operation X42</h1>
+                    <p className="lead">Preliminary public disclosure — Safety, legal preservation & documentation.</p>
+                    <div className="ctaRow">
+                      <Link className="btn" to="/slides">Read Brief</Link>
+                      <Link className="btn ghost" to="/contact">Secure Contact</Link>
                     </div>
-                    <div className="canvasArea">
-                      <HeroCanvas />
-                    </div>
-                  </section>
+                  </div>
+                  <div className="canvasArea">
+                    <HeroCanvas />
+                  </div>
+                </section>
 
-                  <section className="intro">
-                    <h3>Immediate ask</h3>
-                    <p>We request legal intake, neutral data custody and safe short-term housing for affected witnesses. See brief for details.</p>
-                  </section>
-                </>
-              }
-            />
-            <Route path="/slides" element={<SlidesPage />} />
-            <Route path="/timeline" element={<TimelinePage />} />
-            <Route path="/assets" element={<AssetsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-          </Routes>
-        </main>
+                <section className="intro">
+                  <h3>Immediate ask</h3>
+                  <p>We request legal intake, neutral data custody and safe short-term housing for affected witnesses. See brief for details.</p>
+                </section>
+              </>
+            }
+          />
+          <Route path="/slides" element={<SlidesPage />} />
+          <Route path="/timeline" element={<TimelinePage />} />
+          <Route path="/assets" element={<AssetsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </main>
 
-        <footer className="foot">
-          <small>Operation X42 • Vorläufige Teilausgabe • Sicherheit ist Pflicht</small>
-        </footer>
-      </div>
-    </>
+      <footer className="foot">
+        <small>Operation X42 • Vorläufige Teilausgabe • Sicherheit ist Pflicht</small>
+      </footer>
+    </div>
   );
 }
