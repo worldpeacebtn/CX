@@ -16,19 +16,49 @@ export default function App() {
       {/* Quantum background */}
       <QuantumBg style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: -1 }} />
 
-      {/* HUD / Header */}
-      <header className="topbar" style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 10 }}>
-        <div className="brandRow">
-          <Logo className="logoSmall" />
-          <div className="brandText">
-            <div className="brandTitle">Operation X42</div>
-            <div className="brandSub">Witness X — Quantum Hack Division</div>
-          </div>
-        </div>
-
+      {/* HUD: always visible */}
+      <div className="hudViewport">
         <div className="hudOverlay">
-          <div className="leftEdge"></div>
-          <div className="rightEdge"></div>
+          <div className="edge top" />
+          <div className="edge bottom" />
+          <div className="edge left" />
+          <div className="edge right" />
+
+          <div className="innerRim" />
+          <div className="scan" />
+          <div className="scanlines" />
+
+          {/* Neon L corners */}
+          <div className="corner corner-neon tl" />
+          <div className="corner corner-neon tr" />
+          <div className="corner corner-neon bl" />
+          <div className="corner corner-neon br" />
+
+          {/* Ghostwire corners */}
+          <div className="corner-ghost use-stroke tl">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <path d="M6 20 L30 20 L40 10" />
+              <path d="M6 20 L6 44 L16 54" />
+            </svg>
+          </div>
+          <div className="corner-ghost use-stroke tr">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <path d="M6 20 L30 20 L40 10" />
+              <path d="M6 20 L6 44 L16 54" />
+            </svg>
+          </div>
+          <div className="corner-ghost use-stroke br">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <path d="M6 20 L30 20 L40 10" />
+              <path d="M6 20 L6 44 L16 54" />
+            </svg>
+          </div>
+          <div className="corner-ghost use-stroke bl">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <path d="M6 20 L30 20 L40 10" />
+              <path d="M6 20 L6 44 L16 54" />
+            </svg>
+          </div>
         </div>
 
         <div className="hudInfo">
@@ -43,35 +73,35 @@ export default function App() {
           <Link to="/assets">Assets</Link>
           <Link to="/contact">Contact</Link>
         </nav>
-      </header>
 
-      {/* Page Content */}
-      <main style={{ paddingTop: "120px" }}>
+        <div className="hudBar" aria-hidden></div>
+      </div>
+
+      {/* Page content */}
+      <main style={{ position: "relative", zIndex: 1 }}>
         <Routes>
           <Route
             path="/"
             element={
-              <>
-                <section className="heroSection" style={{ minHeight: "100vh", position: "relative" }}>
-                  <div className="quantumBg"></div>
-                  <div className="heroContent">
-                    <h1>Witness X — Operation X42</h1>
-                    <p className="lead">Preliminary public disclosure — Safety, legal preservation & documentation.</p>
-                    <div className="ctaRow">
-                      <Link className="btn" to="/slides">Read Brief</Link>
-                      <Link className="btn ghost" to="/contact">Secure Contact</Link>
-                    </div>
+              <section className="heroSection" style={{ minHeight: "100vh" }}>
+                <div className="heroContent">
+                  <h1>Witness X — Operation X42</h1>
+                  <p className="lead">
+                    Preliminary public disclosure — Safety, legal preservation & documentation.
+                  </p>
+                  <div className="ctaRow">
+                    <Link className="btn" to="/slides">
+                      Read Brief
+                    </Link>
+                    <Link className="btn ghost" to="/contact">
+                      Secure Contact
+                    </Link>
                   </div>
-                  <div className="canvasArea">
-                    <HeroCanvas />
-                  </div>
-                </section>
-
-                <section className="intro">
-                  <h3>Immediate ask</h3>
-                  <p>We request legal intake, neutral data custody and safe short-term housing for affected witnesses. See brief for details.</p>
-                </section>
-              </>
+                </div>
+                <div className="canvasArea">
+                  <HeroCanvas />
+                </div>
+              </section>
             }
           />
           <Route path="/slides" element={<SlidesPage />} />
@@ -81,7 +111,7 @@ export default function App() {
         </Routes>
       </main>
 
-      <footer className="foot">
+      <footer className="foot" style={{ zIndex: 5, position: "relative" }}>
         <small>Operation X42 • Vorläufige Teilausgabe • Sicherheit ist Pflicht</small>
       </footer>
     </div>
