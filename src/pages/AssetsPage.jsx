@@ -4,7 +4,6 @@ import QuantumBg from './components/QuantumBg';
 
 export default function AssetsPage() {
   return (
-      <QuantumBg /> {/* Always at the top so it’s behind all content */}
     <div className="page">
       <h2>Endangered Assets</h2>
       <table className="assetsTable">
