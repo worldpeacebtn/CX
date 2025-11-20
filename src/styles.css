@@ -42,6 +42,21 @@ html, body {
   display: none; /* optional: HeroCanvas now handles background */
 }
 
+/* ===== HERO CANVAS FIX ===== */
+.heroCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* fill screen */
+  min-width: 100vw;
+  min-height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* ===== HERO CONTENT / CENTER ===== */
 .heroSection {
   display: flex;
   flex-direction: column;
@@ -52,6 +67,7 @@ html, body {
   color: #f3f6ff;
 }
 
+/* ===== H1 HOLO FUTURISTIC ===== */
 .heroContent h1 {
   font-size: 3.2rem;
   font-weight: 800;
@@ -66,6 +82,80 @@ html, body {
   letter-spacing: 0.05em;
 }
 
+/* ===== FIXED RIGHT SIDE MENU (GAMING HUD STYLE) ===== */
+.fixedMenu {
+  position: fixed;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: rgba(12,8,32,0.65);
+  backdrop-filter: blur(10px);
+  border-left: 2px solid rgba(127,91,255,0.3);
+  border-right: 2px solid rgba(31,182,255,0.15);
+  padding: 12px 16px;
+  border-radius: 12px 0 0 12px;
+  z-index: 999;
+}
+
+.fixedMenu a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+}
+
+.fixedMenu a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px var(--accent2), 0 0 16px var(--accent);
+  transform: translateX(-4px);
+  background: rgba(127,91,255,0.05);
+}
+
+/* ===== GAMING HUD STATUS BAR UNDERNEATH ===== */
+.hudBar {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 4px;
+  background: linear-gradient(90deg, #7f5bff, #1fb6ff);
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(127,91,255,0.5),
+              0 0 24px rgba(31,182,255,0.3);
+  z-index: 998;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 880px) {
+  .fixedMenu {
+    top: auto;
+    bottom: 1rem;
+    right: 50%;
+    transform: translateX(50%);
+    flex-direction: row;
+    border-radius: 12px;
+    border-left: none;
+    border-right: none;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .fixedMenu a {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .hudBar {
+    width: 90%;
+    height: 3px;
+  }
+}
 .heroContent p {
   font-size: 1.25rem;
   color: var(--muted);
