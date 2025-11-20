@@ -85,7 +85,7 @@ html, body {
 /* ===== FIXED RIGHT SIDE HOLO HUD MENU ===== */
 .fixedMenu {
   position: fixed;
-  bottom: 7%;
+  bottom: 50%;
   right: 2rem;
   transform: translateY(-50%);
   display: flex;
