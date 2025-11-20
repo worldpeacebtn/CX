@@ -25,8 +25,10 @@ export default function App() {
         </div>
 
 <div className="hudOverlay">
-  <div className="hudTop"></div>
-  <div className="hudBottom"></div>
+  <div className="hudEdge top"></div>
+  <div className="hudEdge bottom"></div>
+  <div className="hudEdge left"></div>
+  <div className="hudEdge right"></div>
 </div>
 
 <div className="hudInfo">
