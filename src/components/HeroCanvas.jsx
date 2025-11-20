@@ -1,19 +1,18 @@
+// src/components/HeroCanvas.jsx
 import React, { Suspense, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
-  OrbitControls,
   Points,
   PointMaterial,
   PerspectiveCamera,
   Text,
   Float,
-  MeshTransmissionMaterial
+  MeshTransmissionMaterial,
 } from "@react-three/drei";
 
 // ---------------- AUTO THEME --------------------
 function useAutoTheme() {
-  const hour =
-    typeof window !== "undefined" ? new Date().getHours() : 20;
+  const hour = typeof window !== "undefined" ? new Date().getHours() : 20;
   return hour >= 18 || hour <= 6 ? "night" : "day";
 }
 
@@ -39,10 +38,8 @@ function Stars({ theme }) {
       arr[i] += Math.sin(t + i) * 0.0001;
       arr[i + 1] += Math.cos(t * 0.25 + i) * 0.00008;
 
-      if (Math.random() > 0.9993)
-        arr[i + 2] += (Math.random() - 0.5) * 0.5;
+      if (Math.random() > 0.9993) arr[i + 2] += (Math.random() - 0.5) * 0.5;
     }
-
     ref.current.geometry.attributes.position.needsUpdate = true;
   });
 
@@ -65,9 +62,9 @@ function HoloCubes() {
     pos: [
       (Math.random() - 0.5) * 6,
       (Math.random() - 0.5) * 4,
-      (Math.random() - 0.5) * 5
+      (Math.random() - 0.5) * 5,
     ],
-    rotSpeed: Math.random() * 0.6 + 0.2
+    rotSpeed: Math.random() * 0.6 + 0.2,
   }));
 
   return (
@@ -81,7 +78,6 @@ function HoloCubes() {
 
 function HoloCube({ pos, rotSpeed }) {
   const ref = useRef();
-
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime() * rotSpeed;
     ref.current.rotation.x = t;
@@ -120,7 +116,6 @@ function QuantumDust() {
   }, []);
 
   const ref = useRef();
-
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
     ref.current.rotation.y = t * 0.12;
@@ -129,12 +124,7 @@ function QuantumDust() {
 
   return (
     <Points ref={ref} positions={positions}>
-      <PointMaterial
-        size={0.032}
-        color="#ffffff"
-        transparent
-        opacity={0.55}
-      />
+      <PointMaterial size={0.032} color="#ffffff" transparent opacity={0.55} />
     </Points>
   );
 }
@@ -142,7 +132,6 @@ function QuantumDust() {
 // ---------------- WORMHOLE --------------------
 function Wormhole({ theme }) {
   const ref = useRef();
-
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
     ref.current.rotation.z = t * 0.25;
@@ -163,7 +152,7 @@ function Wormhole({ theme }) {
   );
 }
 
-// ---------------- FLOATING TEXT --------------------
+// ---------------- FLOATING HOLO TEXT --------------------
 function FloatingText() {
   return (
     <Float speed={1.8} rotationIntensity={0.6} floatIntensity={0.7}>
@@ -216,21 +205,18 @@ function CinematicCamera() {
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
-
     const radius = 1.1;
     const baseX = Math.sin(t * 0.11) * radius;
     const baseY = Math.cos(t * 0.09) * radius * 0.7;
 
     const parallaxX = pointer.current.x * 0.35;
     const parallaxY = pointer.current.y * 0.22;
-
     const shakeX = Math.sin(t * 6.8) * 0.018;
     const shakeY = Math.cos(t * 7.7) * 0.018;
 
     ref.current.position.x = baseX + parallaxX + shakeX;
     ref.current.position.y = baseY + parallaxY + shakeY;
     ref.current.position.z = 19 + Math.sin(t * 0.25) * 0.4;
-
     ref.current.lookAt(0, 0, 0);
   });
 
@@ -249,18 +235,14 @@ export default function HeroCanvas() {
         width: "100%",
         height: "100vh",
         pointerEvents: "none",
-        background:
-          theme === "day"
-            ? "rgba(255,255,255,0.15)"
-            : "rgba(0,0,0,0.15)",
+        background: theme === "day" ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.1)",
         backdropFilter: "blur(4px)",
-        transition: "background 0.6s ease"
+        transition: "background 0.6s ease",
       }}
     >
       <Suspense fallback={null}>
         <Canvas dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
           <CinematicCamera />
-
           <ambientLight intensity={0.9} />
           <directionalLight intensity={0.5} position={[5, 5, 5]} />
 
@@ -270,8 +252,6 @@ export default function HeroCanvas() {
           <Wormhole theme={theme} />
           <X42Logo />
           <FloatingText />
-
-          <OrbitControls enableZoom={false} enableRotate={false} enablePan={false} />
         </Canvas>
       </Suspense>
     </div>
