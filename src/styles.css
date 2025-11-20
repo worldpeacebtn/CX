@@ -40,7 +40,7 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
   inset:0;
   pointer-events:none;
   z-index:0;
-  background-image: url('/mnt/data/CC4E1C06-DA1C-40BA-9957-85ACEBC6F074.jpeg');
+ /* background-image: url('/mnt/data/CC4E1C06-DA1C-40BA-9957-85ACEBC6F074.jpeg'); */
   background-size: cover;
   background-position: center;
   opacity: 0.06;
