@@ -24,7 +24,7 @@ export default function App() {
           </div>
         </div>
 
-        <nav className="nav">
+        <nav className="fixedMenu">
           <Link to="/">Home</Link>
           <Link to="/slides">Brief</Link>
           <Link to="/timeline">Timeline</Link>
