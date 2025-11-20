@@ -31,6 +31,7 @@ export default function App() {
           <Link to="/assets">Assets</Link>
           <Link to="/contact">Contact</Link>
         </nav>
+        <div className="hudBar"></div>
       </header>
 
       <main>
