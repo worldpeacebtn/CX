@@ -12,13 +12,19 @@ import QuantumBg from './components/QuantumBg';
 export default function App() {
   return (
     <>
-      {/* BACKGROUND LAYERS */}
-      <QuantumBg style={{ position: "fixed", inset: 0, zIndex: -2, pointerEvents: "none" }} />
-      <HeroCanvas style={{ position: "fixed", inset: 0, zIndex: -1, pointerEvents: "none" }} />
+      {/* BACKGROUND */}
+      <div style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: -9999, // force behind everything
+        pointerEvents: "none" // clicks pass through
+      }}>
+        <QuantumBg />
+        <HeroCanvas />
+      </div>
 
       {/* APP CONTENT */}
       <div className="appWrapper" style={{ position: "relative", zIndex: 1, minHeight: "100vh" }}>
-        
         {/* HUD */}
         <div className="hudViewport">
           <div className="hudOverlay">
