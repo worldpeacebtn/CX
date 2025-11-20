@@ -83,23 +83,22 @@ html, body {
 }
 
 /* ===== FIXED RIGHT SIDE HOLO HUD MENU ===== */
+/* ===== FIXED RIGHT SIDE MENU (DESKTOP) ===== */
 .fixedMenu {
   position: fixed;
-  bottom: 50%;
-  right: 2rem;
+  top: 50%;
+  right: 1rem;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  background: rgba(12,8,32,0.45);
-  backdrop-filter: blur(12px);
+  gap: 16px;
+  background: rgba(12,8,32,0.55);
+  backdrop-filter: blur(14px);
   border-left: 2px solid rgba(127,91,255,0.45);
-  border-right: 2px solid rgba(31,182,255,0.2);
-  padding: 14px 18px;
-  border-radius: 14px 0 0 14px;
+  padding: 16px 20px;
+  border-radius: 12px 0 0 12px;
   z-index: 999;
-  box-shadow: 0 0 12px rgba(127,91,255,0.3),
-              0 0 20px rgba(31,182,255,0.2);
+  box-shadow: 0 0 16px rgba(127,91,255,0.4), 0 0 28px rgba(31,182,255,0.25);
   animation: hudGlow 3s infinite alternate;
 }
 
@@ -110,29 +109,11 @@ html, body {
   padding: 10px 14px;
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
-  position: relative;
-}
-
-.fixedMenu a::before {
-  content: '';
-  position: absolute;
-  left: -4px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 0;
-  background: linear-gradient(to bottom, var(--accent), var(--accent2));
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-.fixedMenu a:hover::before {
-  height: 100%;
 }
 
 .fixedMenu a:hover {
   color: #fff;
-  text-shadow: 0 0 10px var(--accent2), 0 0 20px var(--accent);
+  text-shadow: 0 0 12px var(--accent2), 0 0 24px var(--accent);
   transform: translateX(-6px);
   background: rgba(127,91,255,0.08);
 }
@@ -140,44 +121,42 @@ html, body {
 /* subtle pulsing glow */
 @keyframes hudGlow {
   0% { box-shadow: 0 0 12px rgba(127,91,255,0.3), 0 0 20px rgba(31,182,255,0.15); }
-  50% { box-shadow: 0 0 18px rgba(127,91,255,0.5), 0 0 28px rgba(31,182,255,0.25); }
+  50% { box-shadow: 0 0 20px rgba(127,91,255,0.5), 0 0 28px rgba(31,182,255,0.25); }
   100% { box-shadow: 0 0 12px rgba(127,91,255,0.3), 0 0 20px rgba(31,182,255,0.15); }
 }
 
-/* ===== HUD STATUS BAR (UNDERNEATH) ===== */
+/* ===== HUD STATUS BAR (VISIBLE) ===== */
 .hudBar {
   position: fixed;
-  bottom: 1rem;
+  bottom: 0.5rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%;
-  height: 5px;
+  width: 85%;
+  height: 6px;
   background: linear-gradient(90deg, #7f5bff, #1fb6ff);
   border-radius: 3px;
-  box-shadow: 0 0 18px rgba(127,91,255,0.6), 0 0 28px rgba(31,182,255,0.35);
+  box-shadow: 0 0 20px rgba(127,91,255,0.6), 0 0 32px rgba(31,182,255,0.35);
   animation: hudBarPulse 2s infinite alternate;
   z-index: 998;
 }
 
 @keyframes hudBarPulse {
-  0% { box-shadow: 0 0 12px rgba(127,91,255,0.5), 0 0 22px rgba(31,182,255,0.3); }
-  50% { box-shadow: 0 0 20px rgba(127,91,255,0.7), 0 0 32px rgba(31,182,255,0.4); }
-  100% { box-shadow: 0 0 12px rgba(127,91,255,0.5), 0 0 22px rgba(31,182,255,0.3); }
+  0% { box-shadow: 0 0 16px rgba(127,91,255,0.5), 0 0 28px rgba(31,182,255,0.3); }
+  50% { box-shadow: 0 0 28px rgba(127,91,255,0.7), 0 0 40px rgba(31,182,255,0.4); }
+  100% { box-shadow: 0 0 16px rgba(127,91,255,0.5), 0 0 28px rgba(31,182,255,0.3); }
 }
 
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 880px) {
   .fixedMenu {
     top: auto;
-    bottom: 1rem;
+    bottom: 3rem;
     right: 50%;
     transform: translateX(50%);
     flex-direction: row;
     border-radius: 12px;
-    border-left: none;
-    border-right: none;
     padding: 8px 12px;
-    gap: 10px;
+    gap: 8px;
   }
 
   .fixedMenu a {
@@ -187,7 +166,7 @@ html, body {
 
   .hudBar {
     width: 90%;
-    height: 3px;
+    height: 4px;
   }
 }
 .heroContent p {
