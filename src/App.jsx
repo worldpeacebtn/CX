@@ -74,5 +74,6 @@ export default function App() {
         <small>Operation X42 • Vorläufige Teilausgabe • Sicherheit ist Pflicht</small>
       </footer>
     </div>
+    </>
   );
 }
