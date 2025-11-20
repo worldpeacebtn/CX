@@ -20,7 +20,7 @@ html, body {
   overflow-x:hidden;
 }
 
-/* <<< IMPORTANT for stacking context fix */
+/* stacking context */
 #root {
   min-height:100vh;
   width:100%;
@@ -38,36 +38,35 @@ html, body {
 .nav a{color:var(--muted);margin-left:14px;text-decoration:none}
 .nav a:hover{color:var(--accent2)}
 
-.canvasArea {
-  display: none; /* optional: HeroCanvas now handles background */
-}
-
-/* ===== HERO CANVAS FIX ===== */
+/* ===== HERO BACKGROUND CANVAS (Z-OUT) ===== */
 .heroCanvas {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh; /* fill screen */
-  min-width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   z-index: -2;
   pointer-events: none;
   overflow: hidden;
 }
 
-/* ===== HERO CONTENT / CENTER ===== */
+.heroCanvas canvas {
+  transform: scale(0.65);
+  transform-origin: center;
+  opacity: 0.9;
+}
+
+/* ===== HERO CONTENT ===== */
 .heroSection {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   padding: 4rem 2rem;
-  z-index: 1; /* above canvas */
+  z-index: 1;
   color: #f3f6ff;
 }
 
-/* ===== H1 HOLO FUTURISTIC ===== */
 .heroContent h1 {
   font-size: 3.2rem;
   font-weight: 800;
@@ -82,7 +81,9 @@ html, body {
   letter-spacing: 0.05em;
 }
 
-/* ===== FULL SCREEN HUD LAYER ===== */
+/* ============================================================
+   TRUE HUD FRAME (FULLSCREEN, FIXED, NEVER COVERS CONTENT)
+   ============================================================ */
 .hudOverlay {
   position: fixed;
   top: 0;
@@ -90,91 +91,62 @@ html, body {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 1000;
-  box-sizing: border-box;
+  z-index: 9999;
 }
 
-/* ===== ANIMATED NEON BORDERS ===== */
-.hudOverlay::before,
-.hudOverlay::after,
-.hudOverlay .leftEdge,
-.hudOverlay .rightEdge {
-  content: "";
+.hudOverlay .edge {
   position: absolute;
   background: linear-gradient(90deg, #7f5bff, #1fb6ff, #7f5bff);
-  background-size: 200% 200%;
-  animation: neonSlide 4s linear infinite alternate;
+  background-size: 300% 300%;
+  animation: neonSweep 4s ease-in-out infinite alternate;
   pointer-events: none;
-  z-index: 1001;
 }
 
-/* top and bottom */
-.hudOverlay::before {
+/* top */
+.hudOverlay .top {
   top: 0;
   left: 0;
   width: 100%;
-  height: 4px;
+  height: 3px;
 }
-.hudOverlay::after {
+
+/* bottom */
+.hudOverlay .bottom {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 4px;
+  height: 3px;
 }
 
-/* left and right */
-.hudOverlay .leftEdge {
+/* left */
+.hudOverlay .left {
   top: 0;
   left: 0;
-  width: 4px;
-  height: 100%;
-}
-.hudOverlay .rightEdge {
-  top: 0;
-  right: 0;
-  width: 4px;
+  width: 3px;
   height: 100%;
 }
 
-/* animated neon gradient slide */
-@keyframes neonSlide {
+/* right */
+.hudOverlay .right {
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+}
+
+@keyframes neonSweep {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* ===== HUD INFO (CENTER TOP) ===== */
-.hudInfo {
-  position: fixed;
-  top: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  pointer-events: none;
-  z-index: 1002;
-}
-
-.hudInfo .title {
-  font-size: 2rem;
-  font-weight: 800;
-  background: linear-gradient(90deg, #7f5bff, #1fb6ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 12px #7f5bff, 0 0 24px #1fb6ff;
-}
-
-.hudInfo .subtitle {
-  font-size: 1rem;
-  color: var(--muted);
-  text-shadow: 0 0 4px rgba(127,91,255,0.4);
-  margin-top: 2px;
-}
-
-/* ===== HUD MENU (RIGHT SIDE DESKTOP / BOTTOM MOBILE) ===== */
+/* ============================================================
+   HOLOGRAPHIC RIGHT SIDE MENU (AAA GAME HUD)
+   ============================================================ */
 .hudMenu {
   position: fixed;
-  right: 1rem;
   top: 50%;
+  right: 1.2rem;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
@@ -184,7 +156,7 @@ html, body {
   border-left: 2px solid rgba(127,91,255,0.35);
   padding: 16px 20px;
   border-radius: 12px 0 0 12px;
-  z-index: 1003;
+  z-index: 9000;
   box-shadow: 0 0 16px rgba(127,91,255,0.4), 0 0 28px rgba(31,182,255,0.25);
   pointer-events: auto;
 }
@@ -205,32 +177,31 @@ html, body {
   background: rgba(127,91,255,0.08);
 }
 
-/* ===== MOBILE HUD MENU ===== */
+/* MOBILE MODE – HUD MENU BOTTOM */
 @media (max-width: 880px) {
   .hudMenu {
     flex-direction: row;
-    bottom: 3rem;
+    bottom: 2rem;
     top: auto;
     right: 50%;
     transform: translateX(50%);
     border-radius: 12px;
-    gap: 8px;
+    gap: 10px;
   }
 
   .hudMenu a {
-    padding: 6px 10px;
+    padding: 8px 10px;
     font-size: 0.95rem;
   }
 }
 
-/* ===== HERO CONTENT PARAGRAPH ===== */
+/* ===== HERO CONTENT P / BUTTONS / CARDS (UNCHANGED) ===== */
 .heroContent p {
   font-size: 1.25rem;
   color: var(--muted);
   text-shadow: 0 0 6px rgba(127,91,255,0.15);
 }
 
-/* ===== BUTTONS ===== */
 .btn {
   display:inline-block;
   padding:10px 14px;
@@ -254,50 +225,27 @@ html, body {
   color:var(--muted);
 }
 
-/* ===== HERO BACKGROUND CANVAS ===== */
-.canvasArea {
-  width:100vw;
-  height:100vh;
-  min-width:100vw;
-  min-height:100vh;
-  display:block;
-  flex-shrink:0;
-  position:fixed;
-  background:linear-gradient(180deg,rgba(15,21,40,0.6),rgba(4,9,20,0.3));
-  border-radius:12px;
-  overflow:show;
-}
-
-canvas { display:block; }
-
 /* ===== PAGE CONTENT ===== */
 .intro{padding:20px 36px;border-top:1px solid rgba(255,255,255,0.02)}
 .page{padding:28px 36px}
 .card{background:var(--card-bg);padding:18px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(127,91,255,0.08)}
 .card h2{margin:0;color:var(--accent)}
 .muted{color:var(--muted);margin-top:6px}
+
+/* timeline, tables, misc */
 .timeline{padding-left:18px}
 .assetsTable{width:100%;border-collapse:collapse;margin-top:12px}
 .assetsTable th, .assetsTable td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left}
 .hint{color:var(--muted);font-size:13px;margin-top:12px}
 .foot{padding:18px;text-align:center;color:var(--muted);margin-top:auto}
 
-/* ===== MOBILE HERO LAYOUT ===== */
+/* ===== MOBILE HERO ===== */
 @media (max-width:880px){
   .heroSection{flex-direction:column}
-  .canvasArea{width:100vw;height:100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: transparent;
-    background-size: cover;
-  }
   .nav{display:none}
 }
 
-/* ===== NEON HACKER OVERLAY ===== */
+/* ===== CRT NEON OVERLAY ===== */
 body::before{
   content:"";
   position:fixed;
@@ -313,7 +261,7 @@ body::before{
   z-index:-1;
 }
 
-/* ===== CARD / GLOW EFFECTS ===== */
+/* ===== CARD GLOW ===== */
 .glow{
   text-shadow:0 0 12px var(--accent2),
                0 0 24px var(--accent2);
@@ -327,15 +275,6 @@ body::before{
   transform:translateY(-3px);
 }
 
-.breachPulse{
-  animation:breach 2s infinite;
-}
-@keyframes breach{
-  0%{ box-shadow:0 0 0px rgba(31,182,255,0); }
-  50%{ box-shadow:0 0 22px rgba(31,182,255,0.4); }
-  100%{ box-shadow:0 0 0px rgba(31,182,255,0); }
-}
-
 /* ===== QUANTUM BACKGROUND ===== */
 .quantumBg{
   position:fixed;
@@ -347,6 +286,7 @@ body::before{
     radial-gradient(circle at 20% 70%, rgba(127,91,255,0.2), transparent 60%);
   animation:quantumShift 12s infinite ease-in-out;
 }
+
 @keyframes quantumShift{
   0%{filter:blur(0px);}
   50%{filter:blur(4px);}
