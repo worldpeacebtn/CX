@@ -53,17 +53,24 @@ html, body {
 }
 
 .heroContent h1 {
-  font-size: 3rem;
-  color: var(--accent);
-  text-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent2);
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #b78fff;
+  background: linear-gradient(90deg, #7f5bff, #1fb6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 6px rgba(127,91,255,0.3),
+    0 0 12px rgba(31,182,255,0.25),
+    0 0 24px rgba(127,91,255,0.15);
+  letter-spacing: 0.05em;
 }
 
 .heroContent p {
+  font-size: 1.25rem;
   color: var(--muted);
-  font-size: 1.2rem;
-  text-shadow: 0 0 4px rgba(127,91,255,0.3);
+  text-shadow: 0 0 6px rgba(127,91,255,0.15);
 }
-
 .btn {
   text-shadow: 0 0 6px rgba(255,255,255,0.4);
   transition: all 0.25s ease;
