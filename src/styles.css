@@ -8,312 +8,135 @@
   --card-bg: rgba(255,255,255,0.02);
 }
 
+/* base */
 *{box-sizing:border-box}
-
-/* ===== FIXED ROOT + BODY ===== */
-html, body {
-  height:100%;
-  margin:0;
-  font-family:Inter, system-ui, -apple-system, 'Helvetica Neue', Arial;
-  color:#eaf0ff;
-  background:linear-gradient(180deg,var(--bg),var(--deep));
-  overflow-x:hidden;
-}
-
-/* stacking context */
-#root {
-  min-height:100vh;
-  width:100%;
-  position:relative;
-  isolation:isolate;
-}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvetica Neue',Arial;color:#eaf0ff;background:linear-gradient(180deg,var(--bg),var(--deep));overflow-x:hidden;}
+#root{min-height:100vh;width:100%;position:relative;isolation:isolate;}
 
 .app{display:flex;flex-direction:column;min-height:100vh;}
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,rgba(0,0,0,0.15),transparent);backdrop-filter: blur(6px);}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,rgba(0,0,0,0.15),transparent);backdrop-filter: blur(6px);z-index:5}
 .brandRow{display:flex;align-items:center;gap:12px}
 .logoSmall{width:48px;height:48px}
 .brandText .brandTitle{font-weight:700;color:var(--accent);letter-spacing:1px}
 .brandText .brandSub{font-size:12px;color:var(--muted)}
 
-.nav a{color:var(--muted);margin-left:14px;text-decoration:none}
-.nav a:hover{color:var(--accent2)}
+/* canvas base (full-screen, behind everything) */
+.heroCanvas{position:fixed;inset:0;width:100%;height:100vh;z-index:-2;pointer-events:none;overflow:hidden}
 
-/* ===== HERO BACKGROUND CANVAS (Z-OUT) ===== */
-.heroCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: -2;
-  pointer-events: none;
-  overflow: hidden;
+/* cinematic vignette & slight color boost to match 3D */
+.hudVignette{
+  pointer-events:none;
+  position:fixed;inset:0;z-index:9998;mix-blend-mode:overlay;
+  background:
+    radial-gradient(60% 60% at 50% 40%, rgba(31,182,255,0.03), transparent 20%),
+    linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.25));
 }
 
-.heroCanvas canvas {
-  transform: scale(0.65);
-  transform-origin: center;
-  opacity: 0.9;
+/* hero content */
+.heroSection{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:4rem 2rem;z-index:2}
+.heroContent h1{
+  font-size:3.6rem;line-height:1; margin:0 0 10px 0;
+  font-weight:900;
+  background: linear-gradient(90deg,#93a0ff,#7f5bff,#1fb6ff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:0.02em;
+  filter: drop-shadow(0 8px 28px rgba(127,91,255,0.12));
 }
 
-/* ===== HERO CONTENT ===== */
-.heroSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 4rem 2rem;
-  z-index: 1;
-  color: #f3f6ff;
-}
+/* hero subtitle & text */
+.heroContent p{font-size:1.05rem;color:var(--muted);max-width:720px; margin-top:8px; text-shadow:0 0 8px rgba(0,0,0,0.2)}
 
-.heroContent h1 {
-  font-size: 3.2rem;
-  font-weight: 800;
-  color: #b78fff;
-  background: linear-gradient(90deg, #7f5bff, #1fb6ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow:
-    0 0 6px rgba(127,91,255,0.3),
-    0 0 12px rgba(31,182,255,0.25),
-    0 0 24px rgba(127,91,255,0.15);
-  letter-spacing: 0.05em;
-}
-
-/* ============================================================
-   TRUE HUD FRAME (FULLSCREEN, FIXED, NEVER COVERS CONTENT)
-   ============================================================ */
-.hudOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-.hudOverlay .edge {
-  position: absolute;
-  background: linear-gradient(90deg, #7f5bff, #1fb6ff, #7f5bff);
-  background-size: 300% 300%;
-  animation: neonSweep 4s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-/* top */
-.hudOverlay .top {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-}
-
-/* bottom */
-.hudOverlay .bottom {
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-}
-
-/* left */
-.hudOverlay .left {
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-}
-
-/* right */
-.hudOverlay .right {
-  top: 0;
-  right: 0;
-  width: 3px;
-  height: 100%;
-}
-
-@keyframes neonSweep {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* ============================================================
-   HOLOGRAPHIC RIGHT SIDE MENU (AAA GAME HUD)
-   ============================================================ */
-.hudMenu {
-  position: fixed;
-  top: 50%;
-  right: 1.2rem;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  background: rgba(12,8,32,0.55);
-  backdrop-filter: blur(12px);
-  border-left: 2px solid rgba(127,91,255,0.35);
-  padding: 16px 20px;
-  border-radius: 12px 0 0 12px;
-  z-index: 9000;
-  box-shadow: 0 0 16px rgba(127,91,255,0.4), 0 0 28px rgba(31,182,255,0.25);
-  pointer-events: auto;
-}
-
-.hudMenu a {
-  color: var(--muted);
-  text-decoration: none;
-  font-weight: 600;
-  padding: 10px 14px;
-  border-radius: 8px;
-  transition: all 0.3s ease-in-out;
-}
-
-.hudMenu a:hover {
-  color: #fff;
-  text-shadow: 0 0 12px var(--accent2), 0 0 24px var(--accent);
-  transform: translateX(-6px);
-  background: rgba(127,91,255,0.08);
-}
-
-/* MOBILE MODE – HUD MENU BOTTOM */
-@media (max-width: 880px) {
-  .hudMenu {
-    flex-direction: row;
-    bottom: 2rem;
-    top: auto;
-    right: 50%;
-    transform: translateX(50%);
-    border-radius: 12px;
-    gap: 10px;
-  }
-
-  .hudMenu a {
-    padding: 8px 10px;
-    font-size: 0.95rem;
-  }
-}
-
-/* ===== HERO CONTENT P / BUTTONS / CARDS (UNCHANGED) ===== */
-.heroContent p {
-  font-size: 1.25rem;
-  color: var(--muted);
-  text-shadow: 0 0 6px rgba(127,91,255,0.15);
-}
-
+/* CTA buttons — stronger contrast and glass */
 .btn {
-  display:inline-block;
-  padding:10px 14px;
-  border-radius:10px;
+  display:inline-block;padding:10px 16px;border-radius:12px;color:white;text-decoration:none;margin-right:10px;font-weight:700;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
-  color:white;
-  text-decoration:none;
-  margin-right:8px;
-  text-shadow: 0 0 6px rgba(255,255,255,0.4);
-  transition: all 0.25s ease;
+  box-shadow:0 6px 30px rgba(31,182,255,0.12), inset 0 -2px 6px rgba(0,0,0,0.12);
+  backdrop-filter: blur(6px);
+}
+.btn.ghost{
+  background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); color:var(--muted); font-weight:600;
+}
+.btn:focus, .btn:hover{transform:translateY(-3px); box-shadow:0 12px 50px rgba(31,182,255,0.18)}
+
+/* ========== HUD FRAME (animated neon edges) ========== */
+.hudOverlay{position:fixed;inset:0;pointer-events:none;z-index:9999;box-sizing:border-box}
+
+/* edges */
+.hudOverlay .hudEdge{position:absolute; background:linear-gradient(90deg,#7f5bff,#1fb6ff,#7f5bff); background-size:300% 300%; animation:edgeSlide 4s linear infinite; pointer-events:none; opacity:0.95;}
+.hudOverlay .hudEdge.top, .hudOverlay .hudEdge.bottom{left:0;width:100%;height:4px}
+.hudOverlay .hudEdge.top{top:0}
+.hudOverlay .hudEdge.bottom{bottom:0}
+.hudOverlay .hudEdge.left, .hudOverlay .hudEdge.right{top:0;height:100%;width:4px}
+.hudOverlay .hudEdge.left{left:0}
+.hudOverlay .hudEdge.right{right:0}
+
+@keyframes edgeSlide{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* subtle glowing inner rim to sell depth */
+.hudOverlay .innerGlow{
+  position:absolute; inset:8px; border-radius:6px; pointer-events:none;
+  box-shadow: inset 0 0 40px rgba(127,91,255,0.03), inset 0 0 80px rgba(31,182,255,0.02);
+  z-index:9999;
 }
 
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 20px var(--accent2);
+/* HUD info (top center) - page title + subtitle */
+.hudInfo{position:fixed;top:1.25rem;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none;z-index:10000;font-family:"JetBrains Mono",monospace}
+.hudInfo .title{font-weight:800;font-size:1.4rem;background:linear-gradient(90deg,#7f5bff,#1fb6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 12px rgba(127,91,255,0.12)}
+.hudInfo .subtitle{color:var(--muted);font-size:0.86rem;margin-top:2px}
+
+/* ========== HUD MENU (READABLE + fixed) ========== */
+.hudMenu{
+  position:fixed; right:1.1rem; top:50%; transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:12px;
+  background:linear-gradient(180deg, rgba(10,6,28,0.66), rgba(10,6,28,0.4));
+  backdrop-filter: blur(10px);
+  padding:12px 14px;border-radius:12px 0 0 12px;
+  border-left:1px solid rgba(127,91,255,0.18);
+  box-shadow:0 10px 40px rgba(12,8,32,0.55);
+  z-index:10005; pointer-events:auto; max-width:220px;
 }
 
-.btn.ghost {
-  background:transparent;
-  border:1px solid rgba(255,255,255,0.06);
-  color:var(--muted);
+/* better contrast for links */
+.hudMenu a{
+  display:block; padding:8px 12px; border-radius:8px;
+  color: #dfe8ff; text-decoration:none; font-weight:700; font-size:0.95rem;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.03);
+  transition:all .22s ease;
+}
+.hudMenu a:hover{ transform:translateX(-6px); color:#ffffff; box-shadow:0 6px 24px rgba(127,91,255,0.12); }
+
+/* small page badge on active link (JS can add .active) */
+.hudMenu a.active{ background: linear-gradient(90deg,var(--accent),var(--accent2)); color:white; box-shadow:0 12px 50px rgba(31,182,255,0.18) }
+
+/* ========== MOBILE: menu bottom, readable big buttons ========== */
+@media (max-width:880px){
+  .hudMenu{flex-direction:row; right:50%; transform:translateX(50%); top:auto; bottom:2.2rem; border-radius:12px; padding:8px 10px; gap:8px; max-width:none}
+  .hudMenu a{padding:10px 12px; font-size:0.95rem}
+  .heroContent h1{font-size:2.6rem}
 }
 
-/* ===== PAGE CONTENT ===== */
+/* ========== small UI polish ========== */
+.hudBar{
+  position:fixed; left:50%; transform:translateX(-50%); bottom:1rem; width:85%; height:6px;
+  background:linear-gradient(90deg,#7f5bff,#1fb6ff); border-radius:3px;
+  box-shadow:0 0 28px rgba(127,91,255,0.38); z-index:9996; pointer-events:none;
+}
+
+/* rest of page content (unchanged small rules) */
 .intro{padding:20px 36px;border-top:1px solid rgba(255,255,255,0.02)}
 .page{padding:28px 36px}
 .card{background:var(--card-bg);padding:18px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(127,91,255,0.08)}
 .card h2{margin:0;color:var(--accent)}
 .muted{color:var(--muted);margin-top:6px}
-
-/* timeline, tables, misc */
-.timeline{padding-left:18px}
 .assetsTable{width:100%;border-collapse:collapse;margin-top:12px}
 .assetsTable th, .assetsTable td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left}
 .hint{color:var(--muted);font-size:13px;margin-top:12px}
 .foot{padding:18px;text-align:center;color:var(--muted);margin-top:auto}
 
-/* ===== MOBILE HERO ===== */
-@media (max-width:880px){
-  .heroSection{flex-direction:column}
-  .nav{display:none}
-}
+/* subtle CRT overlay for depth */
+body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;background:repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(255,255,255,0.015) 3px);mix-blend-mode:overlay;z-index:-1}
 
-/* ===== CRT NEON OVERLAY ===== */
-body::before{
-  content:"";
-  position:fixed;
-  top:0;left:0;width:100%;height:100%;
-  pointer-events:none;
-  background:repeating-linear-gradient(
-    to bottom,
-    rgba(0,0,0,0) 0px,
-    rgba(0,0,0,0) 2px,
-    rgba(255,255,255,0.015) 3px
-  );
-  mix-blend-mode:overlay;
-  z-index:-1;
-}
-
-/* ===== CARD GLOW ===== */
-.glow{
-  text-shadow:0 0 12px var(--accent2),
-               0 0 24px var(--accent2);
-}
-.card{
-  box-shadow:0 0 12px rgba(127,91,255,0.25);
-  transition:0.25s;
-}
-.card:hover{
-  box-shadow:0 0 20px rgba(31,182,255,0.4);
-  transform:translateY(-3px);
-}
-
-/* ===== QUANTUM BACKGROUND ===== */
-.quantumBg{
-  position:fixed;
-  top:0;left:0;width:100%;height:100%;
-  z-index:-2;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(127,91,255,0.25), transparent 70%),
-    radial-gradient(circle at 80% 30%, rgba(31,182,255,0.25), transparent 60%),
-    radial-gradient(circle at 20% 70%, rgba(127,91,255,0.2), transparent 60%);
-  animation:quantumShift 12s infinite ease-in-out;
-}
-
-@keyframes quantumShift{
-  0%{filter:blur(0px);}
-  50%{filter:blur(4px);}
-  100%{filter:blur(0px);}
-}
-
-/* ===== TERMINAL ===== */
-.terminal{
-  background:#000814;
-  padding:18px;
-  border-radius:10px;
-  font-family:"JetBrains Mono", monospace;
-  color:#18f3ff;
-  border:1px solid rgba(24,243,255,0.3);
-  box-shadow:0 0 30px rgba(24,243,255,0.08);
-}
-.terminal .cmd{
-  color:#e0ffff;
-  margin-bottom:6px;
-}
-.terminal .path{
-  color:#18f3ff;
-}
-.blink{
-  animation:blink 1s infinite;
-}
-@keyframes blink{
-  0%,50%{opacity:1;}
-  50.01%,100%{opacity:0;}
-}
+/* quantum bg (keeps your feel) */
+.quantumBg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-3;background: radial-gradient(circle at 50% 50%, rgba(127,91,255,0.20), transparent 60%), radial-gradient(circle at 80% 30%, rgba(31,182,255,0.08), transparent 60%); animation:quantumShift 12s infinite ease-in-out}
+@keyframes quantumShift{0%{filter:blur(0px)}50%{filter:blur(4px)}100%{filter:blur(0px)}}
