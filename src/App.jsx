@@ -25,15 +25,13 @@ export default function App() {
         </div>
 
 <div className="hudOverlay">
-  <div className="hudEdge top"></div>
-  <div className="hudEdge bottom"></div>
-  <div className="hudEdge left"></div>
-  <div className="hudEdge right"></div>
+  <div className="leftEdge"></div>
+  <div className="rightEdge"></div>
 </div>
 
 <div className="hudInfo">
-  <div className="title">X42 OPERATION</div>
-  <div className="subtitle">Quantum Division Interface</div>
+  <div className="title">X42 QUANTUM OPERATION</div>
+  <div className="subtitle">Holo Interface Active</div>
 </div>
 
 <nav className="hudMenu">
