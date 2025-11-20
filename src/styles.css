@@ -113,7 +113,7 @@ canvas {
   left: 0;
   z-index: -1;           /* behind all other content */
   pointer-events: none;  /* makes it non-clickable */
-  background: red;
+  background: transparent;
   background-size: cover; /* or use any background you want */
 }
   .nav{display:none}
