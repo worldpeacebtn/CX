@@ -158,3 +158,29 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
   pointer-events: none;
 }
 
+/* ==========================================================
+   HARD OVERRIDE — forces background to bottom of stack
+   ========================================================== */
+
+.bgLayer,
+.bgLayer * {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -10 !important;  /* ← forces background behind body */
+  pointer-events: none !important; /* ← prevents blocking clicks */
+}
+
+/* Main content above */
+.mainContent,
+.mainContent * {
+  position: relative;
+  z-index: 10 !important;
+  pointer-events: auto !important;
+}
+
+/* HUD very top */
+.hudViewport,
+.hudViewport * {
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+}
