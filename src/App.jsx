@@ -7,18 +7,24 @@ import SlidesPage from "./pages/SlidesPage";
 import TimelinePage from "./pages/TimelinePage";
 import AssetsPage from "./pages/AssetsPage";
 import ContactPage from "./pages/ContactPage";
+import CollaborationPage from "./pages/CollaborationPage";
 
-import QuantumBg from './components/QuantumBg';
+import QuantumBg from "./components/QuantumBg";
 
 export default function App() {
   return (
-    <div className="appWrapper" style={{ position: "relative", minHeight: "100vh" }}>
-      {/* Quantum background */}
-      <QuantumBg style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: -1 }} />
+    <div className="app" style={{ position: "relative", minHeight: "100vh" }}>
+      
+      {/* FIXED: background always BELOW everything */}
+      <div style={{ position: "fixed", inset: 0, zIndex: -5 }}>
+        <QuantumBg />
+      </div>
 
-      {/* HUD: always visible */}
-      <div className="hudViewport">
+      {/* HUD */}
+      <div className="hudViewport" style={{ zIndex: 20, pointerEvents: "none" }}>
         <div className="hudOverlay">
+
+          {/* Edges */}
           <div className="edge top" />
           <div className="edge bottom" />
           <div className="edge left" />
@@ -28,33 +34,33 @@ export default function App() {
           <div className="scan" />
           <div className="scanlines" />
 
-          {/* Neon L corners */}
+          {/* Neon Corners */}
           <div className="corner corner-neon tl" />
           <div className="corner corner-neon tr" />
           <div className="corner corner-neon bl" />
           <div className="corner corner-neon br" />
 
-          {/* Ghostwire corners */}
-          <div className="corner-ghost use-stroke tl">
-            <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          {/* Ghost Corners */}
+          <div className="corner-ghost tl">
+            <svg viewBox="0 0 100 100">
               <path d="M6 20 L30 20 L40 10" />
               <path d="M6 20 L6 44 L16 54" />
             </svg>
           </div>
-          <div className="corner-ghost use-stroke tr">
-            <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <div className="corner-ghost tr">
+            <svg viewBox="0 0 100 100">
               <path d="M6 20 L30 20 L40 10" />
               <path d="M6 20 L6 44 L16 54" />
             </svg>
           </div>
-          <div className="corner-ghost use-stroke br">
-            <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <div className="corner-ghost br">
+            <svg viewBox="0 0 100 100">
               <path d="M6 20 L30 20 L40 10" />
               <path d="M6 20 L6 44 L16 54" />
             </svg>
           </div>
-          <div className="corner-ghost use-stroke bl">
-            <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <div className="corner-ghost bl">
+            <svg viewBox="0 0 100 100">
               <path d="M6 20 L30 20 L40 10" />
               <path d="M6 20 L6 44 L16 54" />
             </svg>
@@ -66,7 +72,8 @@ export default function App() {
           <div className="subtitle">Holo Interface Active</div>
         </div>
 
-        <nav className="hudMenu">
+        {/* FIXED: clickable menu must have pointer-events:auto AND high z-index */}
+        <nav className="hudMenu" style={{ pointerEvents: "auto", zIndex: 30 }}>
           <Link to="/">Home</Link>
           <Link to="/slides">Brief</Link>
           <Link to="/timeline">Timeline</Link>
@@ -75,44 +82,40 @@ export default function App() {
           <Link to="/contact">Contact</Link>
         </nav>
 
-        <div className="hudBar" aria-hidden></div>
+        <div className="hudBar"></div>
       </div>
 
-      {/* Page content */}
-      <main style={{ position: "relative", zIndex: 1 }}>
+      {/* PAGE CONTENT ALWAYS ABOVE BG BUT BELOW HUD */}
+      <main style={{ position: "relative", zIndex: 10 }}>
         <Routes>
           <Route
             path="/"
             element={
-              <section className="heroSection" style={{ minHeight: "100vh" }}>
+              <section className="heroSection">
                 <div className="heroContent">
                   <h1>Witness X — Operation X42</h1>
                   <p className="lead">
                     Preliminary public disclosure — Safety, legal preservation & documentation.
                   </p>
                   <div className="ctaRow">
-                    <Link className="btn" to="/slides">
-                      Read Brief
-                    </Link>
-                    <Link className="btn ghost" to="/contact">
-                      Secure Contact
-                    </Link>
+                    <Link className="btn" to="/slides">Read Brief</Link>
+                    <Link className="btn ghost" to="/contact">Secure Contact</Link>
                   </div>
                 </div>
-                <div className="canvasArea">
-                  <HeroCanvas />
-                </div>
+                <HeroCanvas />
               </section>
             }
           />
+
           <Route path="/slides" element={<SlidesPage />} />
           <Route path="/timeline" element={<TimelinePage />} />
           <Route path="/assets" element={<AssetsPage />} />
+          <Route path="/collaboration" element={<CollaborationPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </main>
 
-      <footer className="foot" style={{ zIndex: 5, position: "relative" }}>
+      <footer className="foot">
         <small>Operation X42 • Vorläufige Teilausgabe • Sicherheit ist Pflicht</small>
       </footer>
     </div>
