@@ -204,3 +204,14 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
   z-index: 10 !important;
   pointer-events: auto !important;
 }
+/* ensure the app content sits above the background wrapper */
+#root, .appWrapper { position: relative; z-index: 1; }
+
+/* background components should not capture pointer events */
+#__background-root { pointer-events: none; }
+
+/* hero canvas */
+.heroCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* app content */
+.heroSection { position: relative; z-index: 2; min-height: 100vh; }
