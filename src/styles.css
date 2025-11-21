@@ -151,4 +151,10 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
 .hudViewport {
   z-index: 10000 !important;
 }
+.quantumBg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
 
