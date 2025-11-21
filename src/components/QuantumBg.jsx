@@ -1,3 +1,5 @@
+
+
 import { useEffect, useRef } from 'react';
 
 export default function QuantumBg() {
@@ -47,6 +49,20 @@ export default function QuantumBg() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return <canvas ref={canvasRef} className="quantumBgCanvas" style={{pointerEvents: 'none', position:'fixed', top:0, left:0, zIndex:-10}}
- />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="quantumBgCanvas"
+      style={{
+        pointerEvents: 'none',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: -10,
+      }}
+    />
+  );
 }
+
