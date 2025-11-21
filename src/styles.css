@@ -184,3 +184,23 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
   z-index: 99999 !important;
   pointer-events: auto !important;
 }
+/* --- Force both background layers behind everything --- */
+.quantumBgCanvas,
+.heroCanvas,
+.heroCanvas canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  z-index: -10 !important;     /* ← THE IMPORTANT PART */
+}
+
+/* Make content clickable and above backgrounds */
+.mainContent,
+.mainContent * {
+  position: relative;
+  z-index: 10 !important;
+  pointer-events: auto !important;
+}
