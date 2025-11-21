@@ -17,7 +17,7 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
 
 /* keep your app layout */
 .app{display:flex;flex-direction:column;min-height:100vh;position:relative;z-index:1;}
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,rgba(0,0,0,0.15),transparent);backdrop-filter: blur(6px);z-index:1;position:relative;}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,rgba(0,0,0,0.15),transparent);backdrop-filter: blur(6px);z-index:30;position:relative;}
 .brandRow{display:flex;align-items:center;gap:12px}
 .logoSmall{width:48px;height:48px}
 .brandText .brandTitle{font-weight:700;color:var(--accent);letter-spacing:1px}
@@ -50,7 +50,7 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
 }
 
 /* === hero content === */
-.heroSection{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:4rem 2rem;z-index:1;position:relative;min-height:100vh;}
+.heroSection{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:4rem 2rem;z-index:0;position:relative;min-height:100vh;}
 .heroContent h1{
   font-size:3.6rem;margin:0;font-weight:900;
   background:linear-gradient(90deg,#9aa2ff,#7f5bff,#1fb6ff);
@@ -67,8 +67,8 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
 .btn:hover{transform:translateY(-3px);box-shadow:0 12px 50px rgba(31,182,255,0.18)}
 
 /* === HUD & overlay ================================================= */
-.hudViewport{position:fixed;inset:0;pointer-events:none;z-index:9998;}
-.hudOverlay{position:fixed;top:var(--hud-inset);left:var(--hud-inset);width:calc(100vw - calc(var(--hud-inset)*2));height:calc(100vh - calc(var(--hud-inset)*2));pointer-events:none;z-index:9999;box-sizing:border-box;border-radius:10px}
+.hudViewport{position:fixed;inset:0;pointer-events:none;z-index:3;}
+.hudOverlay{position:fixed;top:var(--hud-inset);left:var(--hud-inset);width:calc(100vw - calc(var(--hud-inset)*2));height:calc(100vh - calc(var(--hud-inset)*2));pointer-events:none;z-index:3;box-sizing:border-box;border-radius:10px}
 
 /* edges: creates a subtle inset border effect around the main viewport area */
 .hudOverlay .edge{position:absolute;pointer-events:none;background:rgba(127,91,255,0.14)}
