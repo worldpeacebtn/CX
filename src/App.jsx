@@ -71,6 +71,7 @@ export default function App() {
           <Link to="/slides">Brief</Link>
           <Link to="/timeline">Timeline</Link>
           <Link to="/assets">Assets</Link>
+          <Link to="/collaboration">X42 × 42 × BSI</Link>
           <Link to="/contact">Contact</Link>
         </nav>
 
