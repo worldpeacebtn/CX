@@ -9,6 +9,8 @@ import TimelinePage from "./pages/TimelinePage";
 import AssetsPage from "./pages/AssetsPage";
 import ContactPage from "./pages/ContactPage";
 
+import { Home, SlidesPage, TimelinePage, AssetsPage, ContactPage } from './pages';
+
 export default function App() {
   return (
     <div className="app" style={{ position: "relative", minHeight: "100vh" }}>
