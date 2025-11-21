@@ -17,7 +17,7 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
 
 /* keep your app layout */
 .app{display:flex;flex-direction:column;min-height:100vh;position:relative;z-index:1;}
-.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,rgba(0,0,0,0.15),transparent);backdrop-filter: blur(6px);z-index:30;position:relative;}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:linear-gradient(90deg,rgba(0,0,0,0.15),transparent);backdrop-filter: blur(6px);z-index:1;position:relative;}
 .brandRow{display:flex;align-items:center;gap:12px}
 .logoSmall{width:48px;height:48px}
 .brandText .brandTitle{font-weight:700;color:var(--accent);letter-spacing:1px}
