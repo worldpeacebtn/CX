@@ -48,5 +48,5 @@ export default function QuantumBg() {
   }, []);
 
   return <canvas ref={canvasRef} className="quantumBgCanvas" style={{pointerEvents: 'none', position:'fixed', top:0, left:0, zIndex:-10}}
-} />;
+ />;
 }
