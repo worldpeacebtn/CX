@@ -175,7 +175,8 @@ export default function HeroCanvas({ bgImage = "/mnt/data/CC4E1C06-DA1C-40BA-995
   const theme = useAutoTheme();
 
   return (
-    <div className="heroCanvas" aria-hidden>
+<div className="heroCanvas" style={{ zIndex: -10, pointerEvents: 'none' }} aria-hidden>
+
       <Suspense fallback={null}>
         <Canvas dpr={[1, 2]} gl={{ antialias: true, alpha: true }}>
           {/* optional: load your uploaded image as scene background (use public/ in production) */}
