@@ -47,5 +47,6 @@ export default function QuantumBg() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  return <canvas ref={canvasRef} className="quantumBgCanvas" style={{pointerEvents: 'none', position: 'fixed', top:0, left:0, zIndex:-2}} />;
+  return <canvas ref={canvasRef} className="quantumBgCanvas" style={{pointerEvents: 'none', position:'fixed', top:0, left:0, zIndex:-10}}
+} />;
 }
