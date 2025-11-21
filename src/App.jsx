@@ -4,10 +4,12 @@ import { Routes, Route, Link } from "react-router-dom";
 import HeroCanvas from "./components/HeroCanvas";
 import QuantumBg from "./components/QuantumBg";
 
-import SlidesPage from "./pages/SlidesPage";
-import TimelinePage from "./pages/TimelinePage";
-import AssetsPage from "./pages/AssetsPage";
-import ContactPage from "./pages/ContactPage";
+import { SlidesPage, TimelinePage, AssetsPage, ContactPage } from "./pages";
+
+//import SlidesPage from "./pages/SlidesPage";
+//import TimelinePage from "./pages/TimelinePage";
+//import AssetsPage from "./pages/AssetsPage";
+//import ContactPage from "./pages/ContactPage";
 
 
 
