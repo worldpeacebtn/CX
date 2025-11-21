@@ -1,12 +1,11 @@
+// src/main.jsx
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App.jsx";
-import "./styles.css"; // <-- make sure your CSS file is imported here
+import App from "./App.jsx";      // must match exact filename App.jsx
+import "./styles.css";           // or index.css if you use that
 
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
