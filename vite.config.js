@@ -9,7 +9,6 @@ export default defineConfig({
 build: {
   rollupOptions: {
     external: ["three"],
-  build: {
     target: "es2020"
   }
 });
