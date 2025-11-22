@@ -22,7 +22,9 @@ export default function App() {
       {/* BACKGROUND LAYER — BOTH MERGED */}
       <div className="bgLayer">
         <QuantumBg />
+        <Suspense fallback={null}>
         <HeroCanvas />
+        </Suspense>
       </div>
 
       {/* HUD ALWAYS TOP */}
