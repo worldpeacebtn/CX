@@ -5,27 +5,20 @@ import "./hero.css";
 export default function Hero() {
   return (
     <section className="hero-wrapper">
-      {/* 3D Background */}
+      {/* Background Canvas */}
       <HeroCanvas />
 
-      {/* Text / Foreground */}
-      <div className="hero-content">
+      {/* Glass-style panel for content */}
+      <div className="hero-content-glass">
         <h1 className="hero-title">
           X42 <span className="quantum">Quantum</span> Division
         </h1>
-
         <p className="hero-sub">
-          The Next Standard of Neo-Quantum Intelligence,  
-          Ethical Cybersecurity & Human-Centered Futurism.
+          A new paradigm for cyber resilience, ethical AI & next‑gen innovation.
         </p>
-
         <div className="hero-buttons">
-          <a href="#mission" className="hero-btn primary">
-            Explore Project 42
-          </a>
-          <a href="#contact" className="hero-btn secondary">
-            Join the Movement
-          </a>
+          <a href="#mission" className="hero-btn primary">Explore Project 42</a>
+          <a href="#contact" className="hero-btn secondary">Join Us</a>
         </div>
       </div>
     </section>
