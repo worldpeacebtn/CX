@@ -1,7 +1,9 @@
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
-import HeroCanvas from "./components/HeroCanvas";
+import { Suspense, lazy } from "react";
+
+//import HeroCanvas from "./components/HeroCanvas";
 import QuantumBg from "./components/QuantumBg";
 
 import { SlidesPage, TimelinePage, AssetsPage, ContactPage } from "./pages";
@@ -11,7 +13,7 @@ import { SlidesPage, TimelinePage, AssetsPage, ContactPage } from "./pages";
 //import AssetsPage from "./pages/AssetsPage";
 //import ContactPage from "./pages/ContactPage";
 
-
+const HeroCanvas = lazy(() => import("./components/HeroCanvas"));
 
 export default function App() {
   return (
