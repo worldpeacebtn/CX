@@ -1,86 +1,56 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
-import { Suspense, lazy } from "react";
-
-//import HeroCanvas from "./components/HeroCanvas";
-import QuantumBg from "./components/QuantumBg";
-
-import { SlidesPage, TimelinePage, AssetsPage, ContactPage } from "./pages";
-
-//import SlidesPage from "./pages/SlidesPage";
-//import TimelinePage from "./pages/TimelinePage";
-//import AssetsPage from "./pages/AssetsPage";
-//import ContactPage from "./pages/ContactPage";
-
+// Lazy-load heavy 3D components to split bundle
 const HeroCanvas = lazy(() => import("./components/HeroCanvas"));
+const QuantumBg = lazy(() => import("./components/QuantumBg"));
+
+// Normal lightweight pages
+import SlidesPage from "./pages/SlidesPage";
+import TimelinePage from "./pages/TimelinePage";
+import AssetsPage from "./pages/AssetsPage";
+import ContactPage from "./pages/ContactPage";
 
 export default function App() {
   return (
     <div className="app" style={{ position: "relative", minHeight: "100vh" }}>
-      
-      {/* BACKGROUND LAYER — BOTH MERGED */}
-      <div className="bgLayer">
-        <QuantumBg />
+
+      {/* ===== BACKGROUND LAYERS ===== */}
+      <div
+        className="bgLayer"
+        aria-hidden
+        style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }}
+      >
         <Suspense fallback={null}>
-        <HeroCanvas />
+          <QuantumBg />
+          <HeroCanvas />
         </Suspense>
       </div>
 
-      {/* HUD ALWAYS TOP */}
-      <div className="hudViewport">
-        <div className="hudOverlay">
-          <div className="edge top" />
-          <div className="edge bottom" />
-          <div className="edge left" />
-          <div className="edge right" />
-
-          <div className="innerRim" />
-          <div className="scan" />
-          <div className="scanlines" />
-
-          <div className="corner corner-neon tl" />
-          <div className="corner corner-neon tr" />
-          <div className="corner corner-neon bl" />
-          <div className="corner corner-neon br" />
-
-          {/* Ghostwire corners */}
-          <div className="corner-ghost tl">
-            <svg viewBox="0 0 100 100">
-              <path d="M6 20 L30 20 L40 10" />
-              <path d="M6 20 L6 44 L16 54" />
-            </svg>
-          </div>
-
-          <div className="corner-ghost tr">
-            <svg viewBox="0 0 100 100">
-              <path d="M6 20 L30 20 L40 10" />
-              <path d="M6 20 L6 44 L16 54" />
-            </svg>
-          </div>
-
-          <div className="corner-ghost br">
-            <svg viewBox="0 0 100 100">
-              <path d="M6 20 L30 20 L40 10" />
-              <path d="M6 20 L6 44 L16 54" />
-            </svg>
-          </div>
-
-          <div className="corner-ghost bl">
-            <svg viewBox="0 0 100 100">
-              <path d="M6 20 L30 20 L40 10" />
-              <path d="M6 20 L6 44 L16 54" />
-            </svg>
-          </div>
-        </div>
-
-        {/* HUD labels */}
-        <div className="hudInfo">
+      {/* ===== HUD OVERLAY ===== */}
+      <div
+        className="hudViewport"
+        style={{ position: "fixed", inset: 0, zIndex: 9998, pointerEvents: "none" }}
+      >
+        <div className="hudInfo" style={{ textAlign: "center", marginTop: "20px" }}>
           <div className="title">X42 QUANTUM OPERATION</div>
-          <div className="subtitle">Holo Interface Active</div>
+          <div className="subtitle">Holo-Interface Active</div>
         </div>
 
-        <nav className="hudMenu">
+        {/* NAVIGATION — pointerEvents enabled */}
+        <nav
+          className="hudMenu"
+          style={{
+            position: "fixed",
+            top: "20px",
+            right: "20px",
+            zIndex: 10000,
+            pointerEvents: "auto",
+            display: "flex",
+            flexDirection: "column",
+            gap: "6px",
+          }}
+        >
           <Link to="/">Home</Link>
           <Link to="/slides">Brief</Link>
           <Link to="/timeline">Timeline</Link>
@@ -88,23 +58,28 @@ export default function App() {
           <Link to="/collaboration">X42 × 42 × BSI</Link>
           <Link to="/contact">Contact</Link>
         </nav>
-
-        <div className="hudBar" />
       </div>
 
-      {/* PAGE CONTENT */}
-      <main className="mainContent">
+      {/* ===== MAIN CONTENT ===== */}
+      <main className="mainContent" style={{ position: "relative", zIndex: 5 }}>
         <Routes>
           <Route
             path="/"
             element={
-              <section className="heroSection">
+              <section className="heroSection" style={{ minHeight: "100vh" }}>
                 <div className="heroContent">
                   <h1>Witness X — Operation X42</h1>
-                  <p className="lead">Preliminary public disclosure — Safety, legal preservation & documentation.</p>
+                  <p className="lead">
+                    Public-safe preliminary release • Documentation • Preservation • Evidence
+                  </p>
+
                   <div className="ctaRow">
-                    <Link className="btn" to="/slides">Read Brief</Link>
-                    <Link className="btn ghost" to="/contact">Secure Contact</Link>
+                    <Link className="btn" to="/slides">
+                      Read Brief
+                    </Link>
+                    <Link className="btn ghost" to="/contact">
+                      Secure Contact
+                    </Link>
                   </div>
                 </div>
               </section>
@@ -118,8 +93,8 @@ export default function App() {
         </Routes>
       </main>
 
-      <footer className="foot">
-        <small>Operation X42 • Vorläufige Teilausgabe • Sicherheit ist Pflicht</small>
+      <footer style={{ position: "relative", zIndex: 5 }}>
+        <small>Operation X42 • Preliminary Release • Safety Protocol Active</small>
       </footer>
     </div>
   );
