@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { PerspectiveCamera } from "@react-three/drei";
-import { Stars } from "./Stars"; // Assuming you have a custom stars component
+import { Stars } from "./Stars"; // Correctly importing the Stars component
 import * as THREE from 'three';
 
 function CinematicCamera() {
@@ -46,7 +46,7 @@ export default function HeroCanvas() {
           <CinematicCamera />
           <ambientLight intensity={0.9} />
           <directionalLight intensity={0.6} position={[6, 4, 6]} />
-          <Stars theme={theme} />
+          <Stars /> {/* Now properly used */}
           <MetaLogo />
           <BunnyHead />
         </Canvas>
