@@ -1,0 +1,232 @@
+:root {
+  --bg: #2b1d56; /* Softer background gradient */
+  --deep: #1b1145; /* Darker shade for depth */
+  --accent: #7f5bff; /* Accent color */
+  --accent2: #1fb6ff; /* Secondary accent */
+  --muted: #9aa8c7; /* Muted text color */
+  --glass: rgba(255, 255, 255, 0.04); /* Glass effect */
+  --card-bg: rgba(255, 255, 255, 0.02); /* Card background */
+}
+
+/* ===== FIXED ROOT + BODY ===== */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, 'Helvetica Neue', Arial;
+  color: #eaf0ff;
+  background: linear-gradient(180deg, var(--bg), var(--deep));
+  overflow-x: hidden;
+}
+
+/* Stack the UI elements */
+#root {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  isolation: isolate;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.15), transparent);
+  backdrop-filter: blur(6px);
+}
+
+/* Logo and brand layout */
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoSmall {
+  width: 48px;
+  height: 48px;
+}
+
+.brandText .brandTitle {
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+.brandText .brandSub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.nav a {
+  color: var(--muted);
+  margin-left: 14px;
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--accent2);
+}
+
+/* === HUD EDGE FRAME === */
+.hudOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.hudOverlay .edge {
+  position: absolute;
+  background: linear-gradient(90deg, #7f5bff, #1fb6ff, #7f5bff);
+  background-size: 300% 300%;
+  animation: neonSweep 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+/* === HERO CONTENT (Home page) === */
+.heroContent h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #b78fff;
+  background: linear-gradient(90deg, #7f5bff, #1fb6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 6px rgba(127, 91, 255, 0.3),
+    0 0 12px rgba(31, 182, 255, 0.25),
+    0 0 24px rgba(127, 91, 255, 0.15);
+  letter-spacing: 0.05em;
+}
+
+/* === HERO CANVAS === */
+.heroCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.heroCanvas canvas {
+  transform: scale(0.75); /* Closer perspective */
+  transform-origin: center;
+  opacity: 0.9;
+}
+
+/* ===== HOLOGRAPHIC MENU (NEW LOCATION AND DESIGN) ===== */
+.hudMenu {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  background: rgba(12, 8, 32, 0.55);
+  backdrop-filter: blur(12px);
+  border-left: 2px solid rgba(127, 91, 255, 0.35);
+  padding: 16px 20px;
+  border-radius: 12px;
+  z-index: 9000;
+  box-shadow: 0 0 16px rgba(127, 91, 255, 0.4), 0 0 28px rgba(31, 182, 255, 0.25);
+  pointer-events: auto;
+}
+
+/* Mobile: HUD Menu above icons */
+@media (max-width: 880px) {
+  .hudMenu {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .hudMenu a {
+    font-size: 0.95rem;
+  }
+}
+
+/* HERO SECTION (for background transition) */
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 2rem;
+  z-index: 1;
+  color: #f3f6ff;
+}
+
+.heroSection .heroContent p {
+  font-size: 1.25rem;
+  color: var(--muted);
+  text-shadow: 0 0 6px rgba(127, 91, 255, 0.15);
+}
+
+/* ADDITIONAL STYLING (Unchanged) */
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color: white;
+  text-decoration: none;
+  margin-right: 8px;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px var(--accent2);
+}
+
+.glow {
+  text-shadow: 0 0 12px var(--accent2), 0 0 24px var(--accent2);
+}
+
+.card {
+  box-shadow: 0 0 12px rgba(127, 91, 255, 0.25);
+  transition: 0.25s;
+}
+
+.card:hover {
+  box-shadow: 0 0 20px rgba(31, 182, 255, 0.4);
+  transform: translateY(-3px);
+}
+
+/* === QUANTUM BACKGROUND (Updated for softer tones) === */
+.quantumBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background: radial-gradient(circle at 50% 50%, rgba(127, 91, 255, 0.25), transparent 70%),
+    radial-gradient(circle at 80% 30%, rgba(31, 182, 255, 0.25), transparent 60%),
+    radial-gradient(circle at 20% 70%, rgba(127, 91, 255, 0.2), transparent 60%);
+  animation: quantumShift 12s infinite ease-in-out;
+}
+
+@keyframes quantumShift {
+  0% {
+    filter: blur(0px);
+  }
+  50% {
+    filter: blur(4px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
