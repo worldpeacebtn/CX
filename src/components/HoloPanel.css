@@ -1,0 +1,34 @@
+/* ==========================================
+   Centered holographic content panel
+   ========================================== */
+
+.holoPanelWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 6rem;
+  padding-bottom: 5rem;
+}
+
+.holoPanel {
+  width: min(900px, 90vw);
+  padding: 32px 40px;
+  background: rgba(12, 8, 32, 0.45);
+  border-radius: 18px;
+  border: 1px solid rgba(127,91,255,0.3);
+  backdrop-filter: blur(18px) saturate(135%);
+  box-shadow:
+    0 0 30px rgba(127,91,255,0.25),
+    inset 0 0 22px rgba(31,182,255,0.25);
+
+  transform: translateY(40px);
+  opacity: 0;
+
+  animation: holoIn 0.7s ease forwards;
+}
+
+@keyframes holoIn {
+  0% { opacity: 0; transform: translateY(40px); }
+  70% { opacity: 1; transform: translateY(-4px); }
+  100% { opacity: 1; transform: translateY(0px); }
+}
