@@ -34,18 +34,18 @@ html, body {
 
 .topbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Center the entire header */
   align-items: center;
   padding: 14px 20px;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.15), transparent);
+  background: linear-gradient(90deg, rgba(0,0,0,0.15), transparent);
   backdrop-filter: blur(6px);
 }
 
-/* Logo and brand layout */
 .brandRow {
   display: flex;
   align-items: center;
   gap: 12px;
+  justify-content: center;
 }
 
 .logoSmall {
