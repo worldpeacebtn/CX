@@ -9,6 +9,7 @@ import AssetsPage from "./pages/AssetsPage";
 import ContactPage from "./pages/ContactPage";
 
 import QuantumBg from './components/QuantumBg';
+import "./styles.css";
 
 export default function App() {
   return (
