@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import { PerspectiveCamera } from "@react-three/drei";
-import { Stars } from "./Stars,jsx"; // Correctly importing the Stars component
+import { Stars } from "./Stars.jsx"; // Correctly importing the Stars component
 import * as THREE from 'three';
 
 function CinematicCamera() {
