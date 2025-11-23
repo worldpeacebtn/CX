@@ -9,7 +9,7 @@ export default function QuantumBg() {
     height: "100%",
     zIndex: 0,
     pointerEvents: "none",
-    backgroundImage: `linear-gradient(180deg, rgba(15,10,40,0.6), rgba(2,4,10,0.5)), url('/assets/bg.png')`,
+    backgroundImage: `linear-gradient(180deg, rgba(15,10,40,0.6), rgba(2,4,10,0.5)), url('/mnt/data/Create_a_high-end,_dark-futuristic_logo_for_an_org.png')`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     opacity: 0.06,
