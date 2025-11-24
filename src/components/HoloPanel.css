@@ -12,7 +12,7 @@
 
 .holoPanel {
   width: min(900px, 90vw);
-  padding: 32px 40px;
+  padding: 1.3rem 1.7rem;
   background: rgba(12, 8, 32, 0.45);
   border-radius: 18px;
   border: 1px solid rgba(127,91,255,0.3);
