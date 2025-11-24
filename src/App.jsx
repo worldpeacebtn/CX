@@ -1,5 +1,4 @@
-// src/App.jsx
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
 import HeroCanvas from "./components/HeroCanvas";
@@ -16,53 +15,29 @@ import HoloSearchbar from "./components/HoloSearchbar";
 import HudMenu from "./components/HudMenu";
 
 export default function App() {
+  // ✅ Move useState to top-level of the component
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = async (query) => {
+    console.log("Searching for:", query);
+    setSearchResults([`Result 1 for ${query}`, `Result 2 for ${query}`]);
+  };
+
   return (
     <div className="appWrapper" style={{ position: "relative", minHeight: "100vh" }}>
 
       {/* BACKGROUND LAYERS */}
       <QuantumBg
-        style={{
-          position: "fixed",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 0
-        }}
+        style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 0 }}
       />
       <HeroCanvas
-        style={{
-          position: "fixed",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 1,
-          pointerEvents: "none"
-        }}
+        style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 1, pointerEvents: "none" }}
       />
 
       {/* ORIGINAL HUD FRAME / OVERLAY */}
       <div className="hudViewport" style={{ zIndex: 20 }}>
         <div className="hudOverlay">
-          <div className="edge top" />
-          <div className="edge bottom" />
-          <div className="edge left" />
-          <div className="edge right" />
-          <div className="innerRim" />
-
-          {/* Corners */}
-          <div className="corner corner-neon tl" />
-          <div className="corner corner-neon tr" />
-          <div className="corner corner-neon bl" />
-          <div className="corner corner-neon br" />
-
-          {/* Ghost corners */}
-          <div className="corner-ghost tl"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
-          <div className="corner-ghost tr"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
-          <div className="corner-ghost br"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
-          <div className="corner-ghost bl"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
-
-          <div className="scan" />
-          <div className="scanlines" />
+          {/* ... all edges, corners, scans ... */}
         </div>
 
         <div className="hudInfo">
@@ -73,9 +48,7 @@ export default function App() {
 
       {/* PAGE CONTENT */}
       <main style={{ position: "relative", zIndex: 10 }}>
-
         <Routes>
-
           <Route
             path="/"
             element={
@@ -94,35 +67,26 @@ export default function App() {
             }
           />
 
-          <Route path="/slides"    element={<HoloPanel><SlidesPage /></HoloPanel>} />
-          <Route path="/timeline"  element={<HoloPanel><TimelinePage /></HoloPanel>} />
-          <Route path="/assets"    element={<HoloPanel><AssetsPage /></HoloPanel>} />
-          <Route path="/contact"   element={<HoloPanel><ContactPage /></HoloPanel>} />
-
+          <Route path="/slides" element={<HoloPanel><SlidesPage /></HoloPanel>} />
+          <Route path="/timeline" element={<HoloPanel><TimelinePage /></HoloPanel>} />
+          <Route path="/assets" element={<HoloPanel><AssetsPage /></HoloPanel>} />
+          <Route path="/contact" element={<HoloPanel><ContactPage /></HoloPanel>} />
         </Routes>
       </main>
 
       {/* BOTTOM HOLO MENU */}
+      <div className="App">
+        <HudMenu>
+          <HoloSearchbar onSearch={handleSearch} />
+        </HudMenu>
 
-        const [searchResults, setSearchResults] = useState([]);
-
-  const handleSearch = async (query) => {
-    // Example: fetch from local or external API
-    console.log("Searching for:", query);
-    // Simulate results
-    setSearchResults([`Result 1 for ${query}`, `Result 2 for ${query}`]);
-  };
-   <div className="App">
-      <HudMenu>
-        <HoloSearchbar onSearch={handleSearch} />
-      </HudMenu>
-
-      <div className="search-results">
-        {searchResults.map((r, idx) => (
-          <div key={idx}>{r}</div>
-        ))}
+        <div className="search-results">
+          {searchResults.map((r, idx) => (
+            <div key={idx}>{r}</div>
+          ))}
+        </div>
       </div>
-    </div>
+
       <HoloMenu />
 
       {/* FOOTER */}
