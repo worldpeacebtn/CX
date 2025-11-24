@@ -155,6 +155,7 @@ main { z-index: 10 }
     clip-path: polygon(
     26% 0,66% 0,92% 0,100% 8%,100% 89%,91% 100%,7% 100%,0 92%,0 0
   );
+  100vh;
 }
 /* Holo container like original input form */
 .input-container {
