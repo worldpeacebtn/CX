@@ -77,9 +77,9 @@ export default function App() {
             <Link to="/timeline">Timeline</Link>
             <Link to="/assets">Assets</Link>
             <Link to="/contact">Contact</Link>
-                      {/* Insert searchbar into nav */}
-    <HoloSearchBar onSearch={handleSearch} />
           </nav>
+                                {/* Insert searchbar into nav */}
+    <HoloSearchBar onSearch={handleSearch} />
         </div>
       </HoloMenu>
 
