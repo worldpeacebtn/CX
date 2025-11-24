@@ -157,7 +157,7 @@ main { z-index: 10 }
     drop-shadow(-55px -40px 25px #9e30a9);
   animation: blinkShadowsFilter 8s ease-in infinite;
   width: 100%;
-  max-width: 1000px;
+  max-width: 100%;
   margin-bottom: 3rem;
 }
 
