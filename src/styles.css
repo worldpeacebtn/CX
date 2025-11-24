@@ -133,3 +133,106 @@ main { z-index: 10 }
 /* === Footer ============================================== */
 .foot{text-align:center;padding:10px 0;background:rgba(0,0,0,0.3);position:fixed;z-index:5;width:100%;margin-top:auto;bottom:0;}
 .foot small{color:var(--muted);font-size:0.75rem;opacity:0.7}
+
+/*page*/
+/* --- Holo Page for flowing text (Fließtext) --- */
+.page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 4rem 2rem; /* space for text */
+  background: linear-gradient(135deg, rgba(50,50,150,0.25), rgba(120,50,200,0.2));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #c0eaff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.6;
+}
+
+/* Optional holographic overlay */
+.page::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,0.02),
+    rgba(255,255,255,0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+/* Flicker / subtle glitch */
+.page .flicker {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(150, 150, 255, 0.08);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  animation: flicker-opacity 0.15s infinite alternate;
+}
+
+@keyframes flicker-opacity {
+  0% { opacity: 0.05; }
+  50% { opacity: 0.12; }
+  100% { opacity: 0.08; }
+}
+
+/* Content container inside .page */
+.page .content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  width: 100%;
+}
+
+/* Holo bottom menu */
+.page .bottom-menu {
+  position: fixed;
+  bottom: 20px;
+  display: flex;
+  gap: 1.5rem;
+  z-index: 3;
+}
+
+.page .bottom-menu .menu-btn {
+  padding: 0.6rem 1.5rem;
+  background: rgba(100, 50, 200, 0.18);
+  border: 1px solid rgba(150, 150, 255, 0.4);
+  border-radius: 12px;
+  color: #a0f7ff;
+  font-size: 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 12px rgba(120, 80, 255, 0.3);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.page .bottom-menu .menu-btn:hover {
+  transform: scale(1.05);
+  background: rgba(120, 50, 255, 0.28);
+}
+
+/* Text styling for readable Fließtext */
+.page h1, .page h2, .page h3 {
+  color: #b0dfff;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 6px rgba(120,80,255,0.3);
+}
+
+.page p {
+  color: #d0f0ff;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Optional flicker effect JS */
