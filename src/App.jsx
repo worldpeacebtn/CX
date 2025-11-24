@@ -32,7 +32,6 @@ export default function App() {
         <div className="hudInfo">
           <div className="title">X42 QUANTUM OPERATION</div>
           <div className="subtitle">Holo Interface Active</div>
-          <HoloSearchBar onSearch={handleSearch} />
         </div>
       </div>
 
@@ -74,19 +73,19 @@ export default function App() {
             <Link to="/contact">Contact</Link>
           </nav>
           {/* Insert searchbar into nav */}
-        </div>
-      </HoloMenu>
-
-      {/* FOOTER */}
-      <footer className="foot">
-        <small>Operation X42 • Vorläufige Teilausgabe • Sicherheit ist Pflicht</small>
-
+                    <HoloSearchBar onSearch={handleSearch} />
       {/* SEARCH RESULTS */}
       <div className="search-results" style={{ position: "relative", zIndex: 30, padding: "1rem" }}>
         {searchResults.map((r, idx) => (
           <div key={idx} style={{ color: "#0ff", marginBottom: "0.25rem" }}>{r}</div>
         ))}
       </div>
+        </div>
+      </HoloMenu>
+
+      {/* FOOTER */}
+      <footer className="foot">
+        <small>Operation X42 • Vorläufige Teilausgabe • Sicherheit ist Pflicht</small>
       </footer>
     </div>
   );
