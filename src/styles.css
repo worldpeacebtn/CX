@@ -182,6 +182,7 @@ main { z-index: 10 }
     26% 0,66% 0,92% 0,100% 8%,100% 89%,91% 100%,7% 100%,0 92%,0 0
   );
   transition: all 1s ease-in-out;
+  z-index:-1;
 }
 
 .input-content::after {
@@ -192,7 +193,7 @@ main { z-index: 10 }
   box-shadow: inset 0px 0px 20px 20px #212121;
   background: repeating-linear-gradient(
       to bottom,
-      transparent 0%,
+      transparent 1%,
       rgba(64, 144, 181, 0.6) 1px,
       rgb(0,0,0) 3px,
       hsl(295, 60%, 12%) 5px,
@@ -209,6 +210,7 @@ main { z-index: 10 }
   );
   animation: backglitch 50ms linear infinite;
   pointer-events: none;
+    z-index:-2;
 }
 
 /* Table styling */
