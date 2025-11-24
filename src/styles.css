@@ -181,6 +181,9 @@ main { z-index: 10 }
   padding: 2rem;
   width: fit-content;
     place-items: center; /* shorthand for align-items & justify-items */
+    clip-path: polygon(
+    26% 0,66% 0,92% 0,100% 8%,100% 89%,91% 100%,7% 100%,0 92%,0 0
+  );
 }
 
 .input-content::before {
