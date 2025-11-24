@@ -6,16 +6,16 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 6rem;
-  padding-bottom: 5rem;
+  margin-top: 3.3rem;
+  padding-bottom: 4.2rem;
 }
 
 .holoPanel {
-  width: min(900px, 90vw);
-  padding: 1.3rem 1.7rem;
+  width: min(90vh, 90vw);
+  padding: .7rem .7rem;
   background: rgba(12, 8, 32, 0.45);
-  border-radius: 18px;
-  border: 1px solid rgba(127,91,255,0.3);
+  border-radius: 11px;
+  border: 1.23px solid rgba(127,91,255,0.3);
   backdrop-filter: blur(18px) saturate(135%);
   box-shadow:
     0 0 30px rgba(127,91,255,0.25),
