@@ -61,8 +61,7 @@ export default function App() {
           <Route path="/contact" element={<HoloPanel><ContactPage /></HoloPanel>} />
         </Routes>
       </main>
-          {/* Insert searchbar into nav */}
-                    <HoloSearchBar onSearch={handleSearch} />
+
       {/* SEARCH RESULTS */}
       <div className="search-results" style={{ position: "relative", zIndex: 30, padding: "1rem" }}>
         {searchResults.map((r, idx) => (
@@ -78,6 +77,8 @@ export default function App() {
             <Link to="/timeline">Timeline</Link>
             <Link to="/assets">Assets</Link>
             <Link to="/contact">Contact</Link>
+                      {/* Insert searchbar into nav */}
+    <HoloSearchBar onSearch={handleSearch} />
           </nav>
         </div>
       </HoloMenu>
