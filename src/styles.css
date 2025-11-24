@@ -159,7 +159,7 @@ clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 1
 .input-container {
   filter: drop-shadow(46px 36px 24px #4090b5)
     drop-shadow(-55px -40px 25px #9e30a9);
-  animation: blinkShadowsFilter 8s ease-in infinite;
+  animation: blinkShadowsFilter 23s ease-in infinite;
   width: 100%;
   max-width: 100%;
   margin-bottom: 3rem;
