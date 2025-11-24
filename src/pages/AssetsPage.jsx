@@ -57,12 +57,6 @@ export default function AssetsPage() {
           </div>
         </div>
       </div>
-
-      <nav className="bottom-menu">
-        <button className="menu-btn">Home</button>
-        <button className="menu-btn">About</button>
-        <button className="menu-btn">Contact</button>
-      </nav>
     </div>
   );
 }
