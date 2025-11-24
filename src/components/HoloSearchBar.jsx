@@ -23,7 +23,7 @@ export default function HoloSearchBar({ onSearch }) {
           borderRadius: "0.25rem",
           border: "1px solid #888",
           outline: "none",
-          z-index: "22",
+          z-index: 22,
           position: "absolute"
         }}
       />
