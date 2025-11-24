@@ -152,7 +152,7 @@ main { z-index: 10 }
   justify-content:center;
 }
 .content{
-  background: #00000077;
+  background: #0c011e9c;
     clip-path: polygon(
     26% 0,66% 0,92% 0,100% 8%,100% 89%,91% 100%,7% 100%,0 92%,0 0
   );
@@ -193,9 +193,7 @@ main { z-index: 10 }
   height: 100%;
   filter: blur(40px);
   background: rgba(122, 251, 255, 0.15);
-  clip-path: polygon(
-    26% 0,66% 0,92% 0,100% 8%,100% 89%,91% 100%,7% 100%,0 92%,0 0
-  );
+clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 100%, 7% 100%, 0 92%, 0 0);
   transition: all 1s ease-in-out;
   z-index:-1;
 }
