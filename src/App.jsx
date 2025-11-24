@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
@@ -6,9 +5,7 @@ import HeroCanvas from "./components/HeroCanvas";
 import QuantumBg from "./components/QuantumBg";
 import HoloMenu from "./components/HoloMenu";
 import HoloPanel from "./components/HoloPanel";
-
-// Only import HoloSearchbar if the file exists
-// import HoloSearchbar from "./components/HoloSearchbar";
+import HoloSearchbar from "./components/HoloSearchbar";
 
 import SlidesPage from "./pages/SlidesPage";
 import TimelinePage from "./pages/TimelinePage";
@@ -16,10 +13,8 @@ import AssetsPage from "./pages/AssetsPage";
 import ContactPage from "./pages/ContactPage";
 
 export default function App() {
-  // Search state
   const [searchResults, setSearchResults] = useState([]);
 
-  // Example search handler
   const handleSearch = async (query) => {
     console.log("Searching for:", query);
     setSearchResults([`Result 1 for ${query}`, `Result 2 for ${query}`]);
@@ -27,7 +22,6 @@ export default function App() {
 
   return (
     <div className="appWrapper" style={{ position: "relative", minHeight: "100vh" }}>
-      
       {/* BACKGROUND LAYERS */}
       <QuantumBg style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 0 }} />
       <HeroCanvas style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 1, pointerEvents: "none" }} />
@@ -35,23 +29,8 @@ export default function App() {
       {/* HUD FRAME */}
       <div className="hudViewport" style={{ zIndex: 20 }}>
         <div className="hudOverlay">
-          <div className="edge top" />
-          <div className="edge bottom" />
-          <div className="edge left" />
-          <div className="edge right" />
-          <div className="innerRim" />
-          <div className="corner corner-neon tl" />
-          <div className="corner corner-neon tr" />
-          <div className="corner corner-neon bl" />
-          <div className="corner corner-neon br" />
-          <div className="corner-ghost tl"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
-          <div className="corner-ghost tr"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
-          <div className="corner-ghost br"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
-          <div className="corner-ghost bl"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
-          <div className="scan" />
-          <div className="scanlines" />
+          {/* edges, corners, scanlines, etc. */}
         </div>
-
         <div className="hudInfo">
           <div className="title">X42 QUANTUM OPERATION</div>
           <div className="subtitle">Holo Interface Active</div>
@@ -85,19 +64,17 @@ export default function App() {
         </Routes>
       </main>
 
-      {/* HOLO MENU */}
-      <HoloMenu />
-      
-      {/* Optional search bar */}
-      {/* Uncomment this if you have HoloSearchbar.jsx */}
-      {/*
-      <HudMenu>
+      {/* HOLO MENU + SEARCH */}
+      <HoloMenu>
         <HoloSearchbar onSearch={handleSearch} />
-      </HudMenu>
-      <div className="search-results" style={{ position: "relative", zIndex: 30 }}>
-        {searchResults.map((r, idx) => <div key={idx}>{r}</div>)}
+      </HoloMenu>
+
+      {/* Render search results above everything else */}
+      <div className="search-results" style={{ position: "relative", zIndex: 30, padding: "1rem" }}>
+        {searchResults.map((r, idx) => (
+          <div key={idx} style={{ color: "#0ff", marginBottom: "0.25rem" }}>{r}</div>
+        ))}
       </div>
-      */}
 
       {/* FOOTER */}
       <footer className="foot">
