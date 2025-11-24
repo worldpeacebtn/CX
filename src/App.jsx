@@ -12,6 +12,9 @@ import TimelinePage from "./pages/TimelinePage";
 import AssetsPage from "./pages/AssetsPage";
 import ContactPage from "./pages/ContactPage";
 
+import HoloSearchbar from "./components/HoloSearchbar";
+import HudMenu from "./components/HudMenu";
+
 export default function App() {
   return (
     <div className="appWrapper" style={{ position: "relative", minHeight: "100vh" }}>
@@ -100,6 +103,26 @@ export default function App() {
       </main>
 
       {/* BOTTOM HOLO MENU */}
+
+        const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = async (query) => {
+    // Example: fetch from local or external API
+    console.log("Searching for:", query);
+    // Simulate results
+    setSearchResults([`Result 1 for ${query}`, `Result 2 for ${query}`]);
+  };
+   <div className="App">
+      <HudMenu>
+        <HoloSearchbar onSearch={handleSearch} />
+      </HudMenu>
+
+      <div className="search-results">
+        {searchResults.map((r, idx) => (
+          <div key={idx}>{r}</div>
+        ))}
+      </div>
+    </div>
       <HoloMenu />
 
       {/* FOOTER */}
