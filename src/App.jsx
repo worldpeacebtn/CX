@@ -73,7 +73,7 @@ export default function App() {
             <Link to="/contact">Contact</Link>
           </nav>
           {/* Insert searchbar into nav */}
-          <HoloSearchbar onSearch={handleSearch} />
+          <HoloSearchBar onSearch={handleSearch} />
         </div>
       </HoloMenu>
 
