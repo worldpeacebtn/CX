@@ -161,7 +161,7 @@ export default function HeroCanvas() {
 
   // limit DPR and antialiasing for mobile stability
   return (
-    <div className="heroCanvas" aria-visible style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }}>
+    <div className="heroCanvas" aria-hidden style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none" }}>
       <Suspense fallback={null}>
         <Canvas
           gl={{ antialias: false, powerPreference: "high-performance" }}
