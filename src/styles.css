@@ -135,66 +135,109 @@ main { z-index: 10 }
 .foot small{color:var(--muted);font-size:0.75rem;opacity:0.7}
 
 /*page*/
-/* --- Holo Page for flowing text (Fließtext) --- */
 .page {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding: 4rem 2rem; /* space for text */
-  background: linear-gradient(135deg, rgba(50,50,150,0.25), rgba(120,50,200,0.2));
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #c0eaff;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  overflow-x: hidden;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(50,50,150,0.15), rgba(120,50,200,0.12));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #c0eaff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
 }
 
-/* Optional holographic overlay */
-.page::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(255,255,255,0.02),
-    rgba(255,255,255,0.02) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  pointer-events: none;
+/* Holo container like original input form */
+.input-container {
+  filter: drop-shadow(46px 36px 24px #4090b5)
+    drop-shadow(-55px -40px 25px #9e30a9);
+  animation: blinkShadowsFilter 8s ease-in infinite;
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 3rem;
 }
 
-/* Flicker / subtle glitch */
-.page .flicker {
+.input-content {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 2rem;
+}
+
+.input-content::before {
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(150, 150, 255, 0.08);
+  filter: blur(40px);
+  background: rgba(122, 251, 255, 0.15);
+  clip-path: polygon(
+    26% 0,66% 0,92% 0,100% 8%,100% 89%,91% 100%,7% 100%,0 92%,0 0
+  );
+  transition: all 1s ease-in-out;
+}
+
+.input-content::after {
+  content: "";
+  position: absolute;
+  width: 98%;
+  height: 98%;
+  box-shadow: inset 0px 0px 20px 20px #212121;
+  background: repeating-linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(64, 144, 181, 0.6) 1px,
+      rgb(0,0,0) 3px,
+      hsl(295, 60%, 12%) 5px,
+      #153544 4px,
+      transparent 0.5%
+    ),
+    repeating-linear-gradient(
+      to left,
+      hsl(295, 60%, 12%) 100%,
+      hsla(295, 60%, 12%, 0.99) 100%
+    );
+  clip-path: polygon(
+    26% 0,31% 5%,61% 5%,66% 0,92% 0,100% 8%,100% 89%,91% 100%,7% 100%,0 92%,0 0
+  );
+  animation: backglitch 50ms linear infinite;
   pointer-events: none;
-  mix-blend-mode: overlay;
-  animation: flicker-opacity 0.15s infinite alternate;
 }
 
-@keyframes flicker-opacity {
-  0% { opacity: 0.05; }
-  50% { opacity: 0.12; }
-  100% { opacity: 0.08; }
-}
-
-/* Content container inside .page */
-.page .content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
+/* Table styling */
+.assetsTable {
   width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  background: rgba(50,50,150,0.1);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-/* Holo bottom menu */
+.assetsTable th, .assetsTable td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: #d0f0ff;
+  text-align: left;
+}
+
+.assetsTable th {
+  background: rgba(120,50,200,0.15);
+  color: #a0f7ff;
+}
+
+.assetsTable tr:hover td {
+  background: rgba(120,50,255,0.08);
+}
+
+/* Bottom menu */
 .page .bottom-menu {
   position: fixed;
   bottom: 20px;
@@ -205,34 +248,44 @@ main { z-index: 10 }
 
 .page .bottom-menu .menu-btn {
   padding: 0.6rem 1.5rem;
-  background: rgba(100, 50, 200, 0.18);
-  border: 1px solid rgba(150, 150, 255, 0.4);
+  background: rgba(100,50,200,0.18);
+  border: 1px solid rgba(150,150,255,0.4);
   border-radius: 12px;
   color: #a0f7ff;
   font-size: 1rem;
   cursor: pointer;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 0 12px rgba(120, 80, 255, 0.3);
+  box-shadow: 0 0 12px rgba(120,80,255,0.3);
   transition: transform 0.2s, background 0.2s;
 }
 
 .page .bottom-menu .menu-btn:hover {
   transform: scale(1.05);
-  background: rgba(120, 50, 255, 0.28);
+  background: rgba(120,50,255,0.28);
 }
 
-/* Text styling for readable Fließtext */
-.page h1, .page h2, .page h3 {
-  color: #b0dfff;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 6px rgba(120,80,255,0.3);
+/* Flicker overlay */
+.page .flicker {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(150,150,255,0.08);
+  pointer-events: none;
+  mix-blend-mode: overlay;
 }
 
-.page p {
-  color: #d0f0ff;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
+/* Animations from original design */
+@keyframes backglitch {
+  0% { box-shadow: inset 0px 20px 20px 30px #212121; }
+  50% { box-shadow: inset 0px -20px 20px 30px hsl(297,42%,10%); }
+  100% { box-shadow: inset 0px 20px 20px 30px #212121; }
 }
 
-/* Optional flicker effect JS */
+@keyframes blinkShadowsFilter {
+  0% { filter: drop-shadow(46px 36px 28px rgba(64,144,181,0.34)) drop-shadow(-55px -40px 28px #9e30a9); }
+  25% { filter: drop-shadow(46px -36px 24px rgba(64,144,181,0.89)) drop-shadow(-55px 40px 24px #9e30a9); }
+  50% { filter: drop-shadow(46px 36px 30px rgba(64,144,181,0.89)) drop-shadow(-55px 40px 30px rgba(159,48,169,0.29)); }
+  75% { filter: drop-shadow(20px -18px 25px rgba(64,144,181,0.89)) drop-shadow(-20px 20px 25px rgba(159,48,169,0.29)); }
+  100% { filter: drop-shadow(46px 36px 28px rgba(64,144,181,0.34)) drop-shadow(-55px -40px 28px #9e30a9); }
+}
