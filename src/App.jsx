@@ -5,7 +5,7 @@ import HeroCanvas from "./components/HeroCanvas";
 import QuantumBg from "./components/QuantumBg";
 import HoloMenu from "./components/HoloMenu";
 import HoloPanel from "./components/HoloPanel";
-import HoloSearchbar from "./components/HoloSearchBar";
+import HoloSearchBar from "./components/HoloSearchBar";
 
 import SlidesPage from "./pages/SlidesPage";
 import TimelinePage from "./pages/TimelinePage";
