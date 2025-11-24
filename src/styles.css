@@ -153,9 +153,7 @@ main { z-index: 10 }
 }
 .content{
   background: #0c011e9c;
-    clip-path: polygon(
-    26% 0,66% 0,92% 0,100% 8%,100% 89%,91% 100%,7% 100%,0 92%,0 0
-  );
+clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 100%, 7% 100%, 0 92%, 0 0);
 }
 /* Holo container like original input form */
 .input-container {
