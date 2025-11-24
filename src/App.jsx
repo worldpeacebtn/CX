@@ -75,7 +75,11 @@ export default function App() {
           {/* Insert searchbar into nav */}
         </div>
       </HoloMenu>
-      <HoloSearchBar onSearch={handleSearch} />
+
+      {/* FOOTER */}
+      <footer className="foot">
+        <small>Operation X42 • Vorläufige Teilausgabe • Sicherheit ist Pflicht</small>
+              <HoloSearchBar onSearch={handleSearch} />
 
       {/* SEARCH RESULTS */}
       <div className="search-results" style={{ position: "relative", zIndex: 30, padding: "1rem" }}>
@@ -83,10 +87,6 @@ export default function App() {
           <div key={idx} style={{ color: "#0ff", marginBottom: "0.25rem" }}>{r}</div>
         ))}
       </div>
-
-      {/* FOOTER */}
-      <footer className="foot">
-        <small>Operation X42 • Vorläufige Teilausgabe • Sicherheit ist Pflicht</small>
       </footer>
     </div>
   );
