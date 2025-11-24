@@ -1,28 +1,41 @@
-import { useState } from "react";
-import "./HoloSearchBar.css";
+import React, { useState } from "react";
 
-export default function HoloSearchBar({ onSearch }) {
+export default function HoloSearchbar({ onSearch }) {
   const [query, setQuery] = useState("");
-
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-    if (onSearch) onSearch(e.target.value);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (onSearch) onSearch(query);
+    if (onSearch && query.trim()) {
+      onSearch(query);
+    }
   };
 
   return (
-    <form className="holo-searchbar" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{ display: "flex", gap: "0.5rem" }}>
       <input
         type="text"
-        placeholder="Search CX..."
+        placeholder="Search..."
         value={query}
-        onChange={handleChange}
+        onChange={(e) => setQuery(e.target.value)}
+        style={{
+          padding: "0.5rem",
+          borderRadius: "0.25rem",
+          border: "1px solid #888",
+          outline: "none",
+        }}
       />
-      <button type="submit">🔍</button>
+      <button
+        type="submit"
+        style={{
+          padding: "0.5rem 1rem",
+          borderRadius: "0.25rem",
+          background: "#0ff",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
+        Go
+      </button>
     </form>
   );
 }
