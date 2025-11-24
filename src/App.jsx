@@ -1,3 +1,4 @@
+// src/App.jsx
 import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
@@ -6,18 +7,19 @@ import QuantumBg from "./components/QuantumBg";
 import HoloMenu from "./components/HoloMenu";
 import HoloPanel from "./components/HoloPanel";
 
+// Only import HoloSearchbar if the file exists
+// import HoloSearchbar from "./components/HoloSearchbar";
+
 import SlidesPage from "./pages/SlidesPage";
 import TimelinePage from "./pages/TimelinePage";
 import AssetsPage from "./pages/AssetsPage";
 import ContactPage from "./pages/ContactPage";
 
-import HoloSearchbar from "./components/HoloSearchbar";
-import HudMenu from "./components/HudMenu";
-
 export default function App() {
-  // ✅ Move useState to top-level of the component
+  // Search state
   const [searchResults, setSearchResults] = useState([]);
 
+  // Example search handler
   const handleSearch = async (query) => {
     console.log("Searching for:", query);
     setSearchResults([`Result 1 for ${query}`, `Result 2 for ${query}`]);
@@ -25,19 +27,29 @@ export default function App() {
 
   return (
     <div className="appWrapper" style={{ position: "relative", minHeight: "100vh" }}>
-
+      
       {/* BACKGROUND LAYERS */}
-      <QuantumBg
-        style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 0 }}
-      />
-      <HeroCanvas
-        style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 1, pointerEvents: "none" }}
-      />
+      <QuantumBg style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 0 }} />
+      <HeroCanvas style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 1, pointerEvents: "none" }} />
 
-      {/* ORIGINAL HUD FRAME / OVERLAY */}
+      {/* HUD FRAME */}
       <div className="hudViewport" style={{ zIndex: 20 }}>
         <div className="hudOverlay">
-          {/* ... all edges, corners, scans ... */}
+          <div className="edge top" />
+          <div className="edge bottom" />
+          <div className="edge left" />
+          <div className="edge right" />
+          <div className="innerRim" />
+          <div className="corner corner-neon tl" />
+          <div className="corner corner-neon tr" />
+          <div className="corner corner-neon bl" />
+          <div className="corner corner-neon br" />
+          <div className="corner-ghost tl"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
+          <div className="corner-ghost tr"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
+          <div className="corner-ghost br"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
+          <div className="corner-ghost bl"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
+          <div className="scan" />
+          <div className="scanlines" />
         </div>
 
         <div className="hudInfo">
@@ -66,7 +78,6 @@ export default function App() {
               </section>
             }
           />
-
           <Route path="/slides" element={<HoloPanel><SlidesPage /></HoloPanel>} />
           <Route path="/timeline" element={<HoloPanel><TimelinePage /></HoloPanel>} />
           <Route path="/assets" element={<HoloPanel><AssetsPage /></HoloPanel>} />
@@ -74,20 +85,19 @@ export default function App() {
         </Routes>
       </main>
 
-      {/* BOTTOM HOLO MENU */}
-      <div className="App">
-        <HudMenu>
-          <HoloSearchbar onSearch={handleSearch} />
-        </HudMenu>
-
-        <div className="search-results">
-          {searchResults.map((r, idx) => (
-            <div key={idx}>{r}</div>
-          ))}
-        </div>
-      </div>
-
+      {/* HOLO MENU */}
       <HoloMenu />
+      
+      {/* Optional search bar */}
+      {/* Uncomment this if you have HoloSearchbar.jsx */}
+      {/*
+      <HudMenu>
+        <HoloSearchbar onSearch={handleSearch} />
+      </HudMenu>
+      <div className="search-results" style={{ position: "relative", zIndex: 30 }}>
+        {searchResults.map((r, idx) => <div key={idx}>{r}</div>)}
+      </div>
+      */}
 
       {/* FOOTER */}
       <footer className="foot">
