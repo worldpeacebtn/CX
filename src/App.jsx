@@ -4,7 +4,8 @@ import { Routes, Route, Link } from "react-router-dom";
 
 import HeroCanvas from "./components/HeroCanvas";
 import QuantumBg from "./components/QuantumBg";
-import HudMenu from "./components/HudMenu";
+import HoloMenu from "./components/HoloMenu";
+import HoloPanel from "./components/HoloPanel";
 
 import SlidesPage from "./pages/SlidesPage";
 import TimelinePage from "./pages/TimelinePage";
@@ -36,14 +37,42 @@ export default function App() {
         }}
       />
 
-      {/* HUD / MENU */}
+      {/* ORIGINAL HUD FRAME / OVERLAY */}
       <div className="hudViewport" style={{ zIndex: 20 }}>
-        <HudMenu />
+        <div className="hudOverlay">
+          <div className="edge top" />
+          <div className="edge bottom" />
+          <div className="edge left" />
+          <div className="edge right" />
+          <div className="innerRim" />
+
+          {/* Corners */}
+          <div className="corner corner-neon tl" />
+          <div className="corner corner-neon tr" />
+          <div className="corner corner-neon bl" />
+          <div className="corner corner-neon br" />
+
+          {/* Ghost corners */}
+          <div className="corner-ghost tl"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
+          <div className="corner-ghost tr"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
+          <div className="corner-ghost br"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
+          <div className="corner-ghost bl"><svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg></div>
+
+          <div className="scan" />
+          <div className="scanlines" />
+        </div>
+
+        <div className="hudInfo">
+          <div className="title">X42 QUANTUM OPERATION</div>
+          <div className="subtitle">Holo Interface Active</div>
+        </div>
       </div>
 
       {/* PAGE CONTENT */}
       <main style={{ position: "relative", zIndex: 10 }}>
+
         <Routes>
+
           <Route
             path="/"
             element={
@@ -61,13 +90,19 @@ export default function App() {
               </section>
             }
           />
-          <Route path="/slides" element={<SlidesPage />} />
-          <Route path="/timeline" element={<TimelinePage />} />
-          <Route path="/assets" element={<AssetsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+
+          <Route path="/slides"    element={<HoloPanel><SlidesPage /></HoloPanel>} />
+          <Route path="/timeline"  element={<HoloPanel><TimelinePage /></HoloPanel>} />
+          <Route path="/assets"    element={<HoloPanel><AssetsPage /></HoloPanel>} />
+          <Route path="/contact"   element={<HoloPanel><ContactPage /></HoloPanel>} />
+
         </Routes>
       </main>
 
+      {/* BOTTOM HOLO MENU */}
+      <HoloMenu />
+
+      {/* FOOTER */}
       <footer className="foot">
         <small>Operation X42 • Vorläufige Teilausgabe • Sicherheit ist Pflicht</small>
       </footer>
