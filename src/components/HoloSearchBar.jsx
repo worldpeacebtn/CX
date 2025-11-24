@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import "./HoloSearchBar.css";
 
-export default function HoloSearchbar({ onSearch }) {
+export default function HoloSearchBar({ onSearch }) {
   const [query, setQuery] = useState("");
 
   const handleSubmit = (e) => {
