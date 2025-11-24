@@ -66,7 +66,7 @@ export default function App() {
 
       {/* HOLO MENU + SEARCH */}
       <HoloMenu>
-        <HoloSearchBar onSearch={handleSearch} />
+        <HoloSearchbar onSearch={handleSearch} />
       </HoloMenu>
 
       {/* Render search results above everything else */}
