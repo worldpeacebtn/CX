@@ -5,7 +5,7 @@ import HeroCanvas from "./components/HeroCanvas";
 import QuantumBg from "./components/QuantumBg";
 import HoloMenu from "./components/HoloMenu";
 import HoloPanel from "./components/HoloPanel";
-import HoloSearchbar from "./components/HoloSearchBar";
+import HoloSearchbar from "./components/HoloSearchbar";
 
 import SlidesPage from "./pages/SlidesPage";
 import TimelinePage from "./pages/TimelinePage";
@@ -22,15 +22,13 @@ export default function App() {
 
   return (
     <div className="appWrapper" style={{ position: "relative", minHeight: "100vh" }}>
-      {/* BACKGROUND LAYERS */}
+      {/* BACKGROUND */}
       <QuantumBg style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 0 }} />
       <HeroCanvas style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 1, pointerEvents: "none" }} />
 
       {/* HUD FRAME */}
       <div className="hudViewport" style={{ zIndex: 20 }}>
-        <div className="hudOverlay">
-          {/* edges, corners, scanlines, etc. */}
-        </div>
+        <div className="hudOverlay" />
         <div className="hudInfo">
           <div className="title">X42 QUANTUM OPERATION</div>
           <div className="subtitle">Holo Interface Active</div>
@@ -64,12 +62,22 @@ export default function App() {
         </Routes>
       </main>
 
-      {/* HOLO MENU + SEARCH */}
+      {/* HOLO MENU (NAV) with SEARCHBAR */}
       <HoloMenu>
-        <HoloSearchbar onSearch={handleSearch} />
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <nav style={{ display: "flex", gap: "1rem" }}>
+            <Link to="/">Home</Link>
+            <Link to="/slides">Slides</Link>
+            <Link to="/timeline">Timeline</Link>
+            <Link to="/assets">Assets</Link>
+            <Link to="/contact">Contact</Link>
+          </nav>
+          {/* Insert searchbar into nav */}
+          <HoloSearchbar onSearch={handleSearch} />
+        </div>
       </HoloMenu>
 
-      {/* Render search results above everything else */}
+      {/* SEARCH RESULTS */}
       <div className="search-results" style={{ position: "relative", zIndex: 30, padding: "1rem" }}>
         {searchResults.map((r, idx) => (
           <div key={idx} style={{ color: "#0ff", marginBottom: "0.25rem" }}>{r}</div>
