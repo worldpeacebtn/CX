@@ -150,7 +150,12 @@ main { z-index: 10 }
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
 }
-
+.content{
+  background: #00000077;
+    clip-path: polygon(
+    26% 0,66% 0,92% 0,100% 8%,100% 89%,91% 100%,7% 100%,0 92%,0 0
+  );
+}
 /* Holo container like original input form */
 .input-container {
   filter: drop-shadow(46px 36px 24px #4090b5)
