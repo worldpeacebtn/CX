@@ -44,12 +44,11 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
     position: sticky;
     z-index: 111;
     top: -.8rem;
-    animation: blinkShadowsFilter 3s 
-ease-in infinite;
-    background: linear-gradient(242deg, #be9aed6b, transparent);
+    animation: blinkShadowsFilter 3s ease-in infinite;
+    background: linear-gradient(242deg,#be9aed6b,transparent);
     filter: drop-shadow(46px 36px 24px #4090b5) drop-shadow(-55px -40px 25px #9e30a9);
     border: .03rem solid #9487f73b;
-    padding: 0 .42rem;
+    padding: 0rem .42rem;
     border-radius: .2rem;
     font-style: oblique;
     font-family: fantasy;
@@ -57,15 +56,15 @@ ease-in infinite;
     outline: #006c8078 .2px solid;
     font-variant-caps: petite-caps;
     color: #b3bfee9e;
-    box-shadow: 0 0 .01rem .23rem #3887f438, 0 .009rem .01rem .4rem #ad4d8236;
+    box-shadow: 0 0 .01rem .23rem #3887f438,0 .009rem .01rem .4rem #ad4d8236;
     -webkit-text-stroke-width: .023rem;
     -webkit-text-stroke-color: #03032bad;
-    width: 97.5%;
-    /* align-items: center; */
-    /* justify-content: center; */
+    width: 100%;
     text-align: center;
     text-shadow: .023rem .13rem 0rem #30054f8a;
-  top:3.5rem;
+    top: 2.3rem;
+    clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+    margin: 3.3rem;
 }
 /* keep your app layout */
 .app{display:flex;flex-direction:column;min-height:100vh;position:relative;z-index:1;}
