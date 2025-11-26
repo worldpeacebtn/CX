@@ -26,6 +26,14 @@ container {
 overflow: scroll;
 }
 
+table {
+  width: 100%;
+}
+
+th {
+  height: 3.5rem;
+}
+
 /* === base =================================================== */
 *{box-sizing:border-box}
 html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvetica Neue',Arial;color:#eaf0ff;overflow-x:hidden;background:var(--bg)}
