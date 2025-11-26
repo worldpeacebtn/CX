@@ -34,13 +34,55 @@ ease-in-out 0s infinite normal none running qb-pulse;
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 10px 14px;
+  /*padding: 10px 14px;*/
   text-decoration: none;
-  color: #9aa8c7;
   font-weight: 600;
   font-size: 0.95rem;
-  border-radius: 10px;
   transition: all 0.22s ease;
+
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    gap: .042rem;
+    padding: .07rem 2.3rem .035rem .35rem;
+    background: linear-gradient(135deg, #8a2be2, #00e5ff23);
+    color: #eae6ffb0;
+    border-radius: .5rem;
+    clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+    font-family: Orbitron, sans-serif;
+    border: .13rem solid rgba(255, 255, 255, .25);
+    margin: 0.42rem;
+    box-shadow: 0 0 10px #8a2be299, 0 0 20px #00e5ff99, inset 0 0 10px #ffffff26;
+    animation: qb-pulse 3s infinite 
+ease-in-out;
+    overflow: hidden;
+
+  /* Glow */
+  box-shadow:
+    0 0 10px rgba(138,43,226,0.6),
+    0 0 20px rgba(0,229,255,0.6),
+    inset 0 0 10px rgba(255,255,255,0.15);
+
+  /* Pulse */
+  animation: qb-pulse 3s infinite ease-in-out;
+
+  /* Shine layer */
+  overflow: hidden;
+}
+
+/* Shine effect */
+.holoBtn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,0.25) 50%,
+    transparent 100%
+  );
+  transform: translateX(-150%);
+  animation: qb-shine 4s infinite;
 }
 
 .holoBtn:hover {
@@ -87,4 +129,5 @@ ease-in-out 0s infinite normal none running qb-pulse;
       0 0 14px rgba(138,43,226,0.8),
       0 0 26px rgba(0,229,255,0.8),
       inset 0 0 12px rgba(255,255,255,0.25);
-  }}
+  }
+}
