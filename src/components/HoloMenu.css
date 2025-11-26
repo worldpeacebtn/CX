@@ -13,16 +13,51 @@
 
 .holoDock {
 display: flex;
-    gap: 16px;
-    padding: 14px 22px;
-    background: linear-gradient(135deg, rgb(138, 43, 226), rgba(0, 229, 255, 0.137));
-    border: 1px solid rgba(127, 91, 255, .35);
-    box-shadow: 0 0 18px #7f5bff66, 0 0 32px #1fb6ff40;
     backdrop-filter: blur(14px) saturate(140%);
-    border-radius: 16px;
-    animation: 3s 
-ease-in-out 0s infinite normal none running qb-pulse;
-    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
+
+     transition: all 0.22s ease;
+
+    flex-direction: column;
+    justify-content: center;
+    gap: .042rem;
+    padding: .07rem 2.3rem .035rem .35rem;
+    background: linear-gradient(135deg, #8a2be2, #00e5ff23);
+    color: #eae6ffb0;
+    border-radius: .5rem;
+    clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+    font-family: Orbitron, sans-serif;
+    border: .13rem solid rgba(255, 255, 255, .25);
+    margin: 0.42rem;
+    box-shadow: 0 0 10px #8a2be299, 0 0 20px #00e5ff99, inset 0 0 10px #ffffff26;
+    animation: qb-pulse 3s infinite ease-in-out;
+    overflow: hidden;
+
+  /* Glow */
+  box-shadow:
+    0 0 10px rgba(138,43,226,0.6),
+    0 0 20px rgba(0,229,255,0.6),
+    inset 0 0 10px rgba(255,255,255,0.15);
+
+  /* Pulse */
+  animation: qb-pulse 3s infinite ease-in-out;
+
+  /* Shine layer */
+  overflow: hidden;
+}
+
+/* Shine effect */
+.holoDock::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,0.25) 50%,
+    transparent 100%
+  );
+  transform: translateX(-150%);
+  animation: qb-shine 4s infinite;
 }
 
 @keyframes holoFloat {
