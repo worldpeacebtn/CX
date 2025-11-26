@@ -27,13 +27,45 @@ export default function App() {
       <HeroCanvas style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 1, pointerEvents: "none" }} />
 
       {/* HUD FRAME */}
-      <div className="hudViewport" style={{ zIndex: 20 }}>
-        <div className="hudOverlay" />
-        <div className="hudInfo">
-          <div className="title">X42 QUANTUM OPERATION</div>
-          <div className="subtitle">Holo Interface Active</div>
-        </div>
-      </div>
+<div className="hudViewport" style={{ zIndex: 20 }}>
+  <div className="hudOverlay">
+
+    <div className="edge top" />
+    <div className="edge bottom" />
+    <div className="edge left" />
+    <div className="edge right" />
+
+    <div className="innerRim" />
+
+    <div className="corner corner-neon tl" />
+    <div className="corner corner-neon tr" />
+    <div className="corner corner-neon bl" />
+    <div className="corner corner-neon br" />
+
+    <div className="corner-ghost tl">
+      <svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg>
+    </div>
+    <div className="corner-ghost tr">
+      <svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg>
+    </div>
+    <div className="corner-ghost br">
+      <svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg>
+    </div>
+    <div className="corner-ghost bl">
+      <svg viewBox="0 0 100 100"><path d="M6 20 L30 20 L40 10" /><path d="M6 20 L6 44 L16 54" /></svg>
+    </div>
+
+    <div className="scan" />
+    <div className="scanlines" />
+
+  </div>
+
+  <div className="hudInfo">
+    <div className="title">X42 QUANTUM OPERATION</div>
+    <div className="subtitle">Holo Interface Active</div>
+  </div>
+</div>
+
 
       {/* PAGE CONTENT */}
       <main style={{ position: "relative", zIndex: 10 }}>
