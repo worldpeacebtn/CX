@@ -71,15 +71,9 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
   position:absolute;
   inset:0;
   pointer-events:none;
-  z-index:0;
- /* background-image: url('/mnt/data/CC4E1C06-DA1C-40BA-9957-85ACEBC6F074.jpeg'); */
   background-size: cover;
   background-position: center;
-  opacity: 0.06;
-  mix-blend-mode: screen;
-  transform: scale(1.02);
-  filter: saturate(1.05) contrast(1.02) blur(0.6px);
-  animation: qb-shine 3s ease-in-out infinite;
+      animation: 3s ease-in-out 0s infinite normal none running qb-pulse;
 }
 /* keep your app layout */
 .app{display:flex;flex-direction:column;min-height:100vh;position:relative;z-index:1;}
