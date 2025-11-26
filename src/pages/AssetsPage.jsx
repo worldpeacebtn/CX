@@ -22,11 +22,10 @@ export default function AssetsPage() {
   return (
     <div className="page">
       <div className="flicker" ref={flickerRef}></div>
-
+            <h1 className="headline" >Endangered Assets</h1>
       <div className="input-container">
         <div className="input-content">
           <div className="content">
-            <h1>Endangered Assets</h1>
 
             <table className="assetsTable">
               <thead>
