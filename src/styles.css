@@ -202,7 +202,7 @@ clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 1
   display: grid;
   align-content: center;
   justify-items: center;
-  justify-content:center;
+  /*justify-content:center;*/
   align-items: center;
   text-align: center;
   position: relative;
@@ -215,6 +215,8 @@ clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 1
     clip-path: polygon(
     26% 0,66% 0,92% 0,100% 8%,100% 89%,91% 100%,7% 100%,0 92%,0 0
   );
+  overflow:scroll;
+  
 }
 
 .input-content::before {
