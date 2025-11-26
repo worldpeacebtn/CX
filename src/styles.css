@@ -139,7 +139,7 @@ main { z-index: 10 }
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding: 2rem;
+  padding: 0 2rem 2rem 2rem;
   background: linear-gradient(135deg, rgba(50,50,150,0.15), rgba(120,50,200,0.12));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -150,6 +150,8 @@ main { z-index: 10 }
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
   justify-content:center;
+  border: 0.43rem solid #4c299c36;
+  border-radius: .23rem;
 }
 .content{
   background: #0c011e9c;
