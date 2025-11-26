@@ -206,8 +206,11 @@ clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 1
   text-align: center;
   position: relative;
   padding: 2rem;
-  width: fit-content;
-    place-items: center; /* shorthand for align-items & justify-items */
+    text-align: center;
+    position: relative;
+    padding: 2rem;
+    width: 115.5%;
+    place-items: center;    place-items: center; /* shorthand for align-items & justify-items */
     clip-path: polygon(
     26% 0,66% 0,92% 0,100% 8%,100% 89%,91% 100%,7% 100%,0 92%,0 0
   );
@@ -221,8 +224,10 @@ clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 1
   filter: blur(40px);
   background: #7c7aff54;
 clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 100%, 7% 100%, 0 92%, 0 0);
-  transition: all 1s ease-in-out;
-  z-index:-1;
+    transition: all 1s 
+ease-in-out;
+    z-index: -1;
+    padding: 0.6rem .5rem;
 }
 
 .input-content::after {
