@@ -12,16 +12,17 @@
 }
 
 .holoDock {
-  display: flex;
-  gap: 16px;
-  padding: 14px 22px;
-  background: rgba(12, 8, 32, 0.45);
-  border: 1px solid rgba(127, 91, 255, 0.35);
-  box-shadow: 0 0 18px rgba(127, 91, 255, 0.4),
-              0 0 32px rgba(31, 182, 255, 0.25);
-  backdrop-filter: blur(14px) saturate(140%);
-  border-radius: 16px;
-  animation: holoFloat 5s ease-in-out infinite alternate;
+display: flex;
+    gap: 16px;
+    padding: 14px 22px;
+    background: linear-gradient(135deg, rgb(138, 43, 226), rgba(0, 229, 255, 0.137));
+    border: 1px solid rgba(127, 91, 255, .35);
+    box-shadow: 0 0 18px #7f5bff66, 0 0 32px #1fb6ff40;
+    backdrop-filter: blur(14px) saturate(140%);
+    border-radius: 16px;
+    animation: 3s 
+ease-in-out 0s infinite normal none running qb-pulse;
+    clip-path: polygon(10% 0%, 90% 0%, 100% 50%, 90% 100%, 10% 100%, 0% 50%);
 }
 
 @keyframes holoFloat {
