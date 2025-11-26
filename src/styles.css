@@ -240,7 +240,7 @@ clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 1
     26% 0,66% 0,92% 0,100% 8%,100% 89%,91% 100%,7% 100%,0 92%,0 0
   );
   overflow:scroll;
-  
+  scrollbar-width:none;
 }
 
 .input-content::before {
@@ -293,6 +293,8 @@ ease-in-out;
   background: rgba(50,50,150,0.1);
   border-radius: 12px;
   overflow: hidden;
+  display: table-cell;
+    align-content: center;
 }
 
 .assetsTable th, .assetsTable td {
