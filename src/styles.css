@@ -308,7 +308,6 @@ ease-in-out;
     text-align: left;
     font-family: monospace;
     opacity: 0.8;
-  transition: 2s smooth;
 }
 
 .assetsTable th {
@@ -327,13 +326,10 @@ ease-in-out;
 .assetsTable tr:hover td {
   background: rgba(120,50,255,0.08);
   scale: 1.1;
-  transition: 1s smooth;
 }
 
 .assetsTable th:hover th{
-scale: 1.1;
-  transition; 2s smooth;
-  
+scale: 1.1;  
 }
 
 /* Bottom menu */
