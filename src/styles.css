@@ -17,7 +17,7 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
 
 /*text*/
 .headline{
-    position: absolute;
+    position: sticky;
     z-index: 111;
     top: -.8rem;
     animation: blinkShadowsFilter 3s 
@@ -41,6 +41,7 @@ ease-in infinite;
     /* justify-content: center; */
     text-align: center;
     text-shadow: .023rem .13rem 0rem #30054f8a;
+  top:3.5rem;
 }
 /* keep your app layout */
 .app{display:flex;flex-direction:column;min-height:100vh;position:relative;z-index:1;}
