@@ -399,4 +399,42 @@ scale: 1.1;
             drop-shadow(-20px -15px 15px rgba(158,48,169,0.18));
   }
 }
+.holo-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.2rem;
+  background: linear-gradient(135deg, #8a2be2 0%, #00e5ff 100%);
+  border-radius: 6px;
+  color: #fff;
+  font-family: Orbitron, sans-serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 8px #8a2be2,
+    0 0 16px #00e5ff,
+    0 0 24px rgba(138,43,226,0.4),
+    0 0 32px rgba(0,229,255,0.4);
+  box-shadow:
+    0 0 12px rgba(138,43,226,0.5),
+    0 0 20px rgba(0,229,255,0.5);
+  transition: filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+.holo-banner:hover {
+  filter: saturate(1.4) brightness(1.2);
+  box-shadow:
+    0 0 18px rgba(138,43,226,0.7),
+    0 0 28px rgba(0,229,255,0.7);
+}
+
+.holo-banner .arrow-right {
+  display: inline-block;
+  width: 0; height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 10px solid #fff;
+  margin-left: 0.6rem;
+  filter: drop-shadow(0 0 8px #00e5ff);
+}
 
