@@ -61,8 +61,15 @@ export default function App() {
   </div>
 
   <div className="hudInfo">
-    <div className="title">X42 QUANTUM OPERATION</div>
-    <div className="subtitle">Holo Interface Active</div>
+<div className="holo-banner">
+  <span>Quantum operation</span>
+  <span className="arrow-right" />
+</div>
+<div className="holo-banner" style={{ marginTop: "8px", fontSize: "0.9rem" }}>
+  <span>Holo Interface Active</span>
+  <span className="arrow-right" />
+</div>
+
   </div>
 </div>
 
