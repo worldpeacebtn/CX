@@ -68,3 +68,23 @@ ease-in-out 0s infinite normal none running qb-pulse;
     padding: 12px 18px;
   }
 }
+/* Keyframes */
+@keyframes qb-shine {
+  0% { transform: translateX(-150%); }
+  60% { transform: translateX(150%); }
+  100% { transform: translateX(150%); }
+}
+
+@keyframes qb-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 10px rgba(138,43,226,0.5),
+      0 0 20px rgba(0,229,255,0.5),
+      inset 0 0 10px rgba(255,255,255,0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 14px rgba(138,43,226,0.8),
+      0 0 26px rgba(0,229,255,0.8),
+      inset 0 0 12px rgba(255,255,255,0.25);
+  }
