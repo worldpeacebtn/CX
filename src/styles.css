@@ -302,15 +302,38 @@ ease-in-out;
   border-bottom: 1px solid rgba(255,255,255,0.1);
   color: #d0f0ff;
   text-align: left;
+      padding: .8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    color: #c4d5fa;
+    text-align: left;
+    font-family: monospace;
+    opacity: 0.8;
+  transition: 2s smooth;
 }
 
 .assetsTable th {
-  background: rgba(120,50,200,0.15);
-  color: #a0f7ff;
+    padding: .8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    color: #c4d5fa;
+    text-align: left;
+    font-family: monospace;
+    opacity: 0.8;
+  height: 3.5rem;
+    font-family: monospace;
+    font-size: large;
+    color: #8793f1 !important;
 }
 
 .assetsTable tr:hover td {
   background: rgba(120,50,255,0.08);
+  scale: 1.1;
+  transition: 1s smooth;
+}
+
+.assetsTable th:hover th{
+scale: 1.1;
+  transition; 2s smooth;
+  
 }
 
 /* Bottom menu */
