@@ -224,7 +224,6 @@ clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 1
   animation: blinkShadowsFilter 23s ease-in infinite;
   width: 100%;
   max-width: 100%;
-  margin-bottom: 3rem;
   display:flex;
   justify-content:center;
   align-content:center;
