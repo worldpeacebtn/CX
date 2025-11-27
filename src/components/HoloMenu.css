@@ -20,7 +20,7 @@ ease;
     flex-direction: column;
     justify-content: center;
     gap: .042rem;
-    padding: .07rem 2.3rem .035rem .35rem;
+    padding: .7rem 2.3rem .035rem .35rem;
     background: linear-gradient(135deg, #8a2be2, #00e5ff23);
     color: #eae6ffb0;
     border-radius: .5rem;
@@ -31,7 +31,6 @@ ease;
     box-shadow: 0 0 10px #8a2be299, 0 0 20px #00e5ff99, inset 0 0 10px #ffffff26;
     animation: qb-pulse 3s infinite 
 ease-in-out;
-    overflow: hidden;
 
   /* Glow */
   box-shadow:
@@ -69,7 +68,6 @@ ease-in-out;
 .holoBtn {
   display: flex;
   align-items: center;
-  gap: 6px;
   /*padding: 10px 14px;*/
   text-decoration: none;
   font-weight: 600;
@@ -80,18 +78,17 @@ ease-in-out;
     flex-direction: column;
     justify-content: center;
     gap: .042rem;
-    padding: .07rem 2.3rem .035rem .35rem;
+    padding: .0rem 2.4rem 0rem .0rem;
     background: linear-gradient(135deg, #8a2be2, #00e5ff23);
     color: #eae6ffb0;
     border-radius: .5rem;
     clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
     font-family: Orbitron, sans-serif;
     border: .13rem solid rgba(255, 255, 255, .25);
-    margin: 0.42rem;
+    /*margin: 0.42rem;*/
     box-shadow: 0 0 10px #8a2be299, 0 0 20px #00e5ff99, inset 0 0 10px #ffffff26;
     animation: qb-pulse 3s infinite 
 ease-in-out;
-    overflow: hidden;
 
   /* Glow */
   box-shadow:
