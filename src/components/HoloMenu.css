@@ -4,8 +4,7 @@
 
 .holoMenu {
   position: fixed;
-position: fixed;
-    top: 2.75rem;
+    top: 3rem;
     left: 0;
     /* transform: translate(-100%); */
     z-index: 9999;
@@ -17,10 +16,10 @@ position: fixed;
     backdrop-filter: blur(14px) saturate(140%);
     transition: all .22s 
 ease;
-    flex-direction: column;
+    /*flex-direction: column;
     justify-content: center;
-    gap: .042rem;
-    padding: 0rem 5rem 0rem 0rem;
+    gap: .042rem;*/
+    padding: 0.63rem 4.7rem 0.35rem 0.35rem;
     /* background: linear-gradient(135deg, #8a2be2, #00e5ff23); */
     color: #eae6ffb0;
     border-radius: ;
@@ -31,7 +30,6 @@ ease;
     box-shadow: 0 0 10px #8a2be299, 0 0 20px #00e5ff99, inset 0 0 10px #ffffff26;
     animation: qb-pulse 3s infinite 
 ease-in-out;
-    overflow: hidden;
 
   /* Glow */
   box-shadow:
