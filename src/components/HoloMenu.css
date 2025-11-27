@@ -73,7 +73,6 @@ ease-in-out;
   font-size: 0.95rem;
   transition: all 0.22s ease;
 
-    position: relative;
     flex-direction: column;
     justify-content: center;
     gap: .042rem;
