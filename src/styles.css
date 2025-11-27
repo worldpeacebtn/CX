@@ -62,9 +62,9 @@ html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Helvet
     width: 100%;
     text-align: center;
     text-shadow: .023rem .13rem 0rem #30054f8a;
-    top: 3.9rem;
+    top: 0rem;
     clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
-    margin: 3.3rem;
+    margin: 0rem;
 }
 .headline::before{
     content:"";
@@ -196,9 +196,9 @@ main { z-index: 10 }
 
 /*page*/
 .page {
-  position: relative;
+  position: sticky;
   width: 100%;
-  min-height: 100vh;
+  /*min-height: 100vh;*/
   padding: 0 2rem 2rem 2rem;
   background: linear-gradient(135deg, rgba(50,50,150,0.15), rgba(120,50,200,0.12));
   backdrop-filter: blur(10px);
@@ -209,7 +209,6 @@ main { z-index: 10 }
   color: #c0eaff;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  justify-content:center;
   border: 0.43rem solid #4c299c36;
   border-radius: .23rem;
 }
@@ -232,9 +231,9 @@ clip-path: polygon(26% 0, 31% 5%, 61% 5%, 66% 0, 92% 0, 100% 8%, 100% 89%, 91% 1
 .input-content {
   display: grid;
   align-content: center;
-  justify-items: center;
-  /*justify-content:center;*/
-  align-items: center;
+ /* justify-items: center;
+  justify-content:center;
+  align-items: center;*/
   text-align: center;
   position: relative;
   padding: 2rem;
