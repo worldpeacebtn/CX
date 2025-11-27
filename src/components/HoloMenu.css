@@ -12,7 +12,7 @@
 }
 
 .holoDock {
-    display: ruby-text;
+    display: inline-flex;
     backdrop-filter: blur(14px) saturate(140%);
     transition: all .22s 
 ease;
