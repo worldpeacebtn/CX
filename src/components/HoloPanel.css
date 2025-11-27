@@ -8,6 +8,8 @@
   justify-content: center;
   margin-top: 3.3rem;
   padding-bottom: 4.2rem;
+   position:absolute;
+   top:0rem;
 }
 
 .holoPanel {
